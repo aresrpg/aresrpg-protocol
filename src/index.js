@@ -8,8 +8,9 @@ export function create_client({ user, socket_write, socket_end }) {
   emitter.user = user
 
   emitter.send = (raw_type, data) => {
+    const type = raw_type.slice(7)
     try {
-      const buffer = Packets.Packet.fromJson({ [raw_type.slice(7)]: data }).toBinary()
+      const buffer = Packets.Packet.fromJson({ [type]: data }).toBinary()
       socket_write(buffer)
     } catch (error) {
       console.error(`'${type}' is not a valid packet !`, error)
