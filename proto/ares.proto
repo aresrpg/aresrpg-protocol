@@ -1,0 +1,41 @@
+syntax = "proto3";
+package ares;
+
+message Packet {
+  oneof type {
+    ChunkLoad chunkLoad = 1;
+    PlayerSpawn playerSpawn = 2;
+    ConnectionRequest connectionRequest = 3;
+    ConnectionResponse connectionResponse = 4;
+  }
+}
+
+// ========================================
+// Packets sent from the server to the client
+
+// request to load chunk
+message ChunkLoad {
+  sint32 x = 1;
+  sint32 z = 2;
+}
+
+// spawn the player
+message PlayerSpawn {
+  float x = 1;
+  float y = 2;
+  float z = 3;
+}
+
+// accept the connection
+message ConnectionResponse {
+  bool accepted = 1;
+  string id = 2;
+}
+
+// ========================================
+// Packets sent from the client to the server
+
+// request to connect
+message ConnectionRequest {
+  string name = 1;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "aresrpg-common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "proto": "npx buf generate proto"
+  },
+  "dependencies": {
+    "@bufbuild/buf": "^1.28.1",
+    "@bufbuild/protobuf": "^1.4.2",
+    "@bufbuild/protoc-gen-es": "^1.4.2"
+  },
+  "devDependencies": {
+    "typescript": "5.1.6",
+    "events-polyfill": "gist:e2c3b3969513bbd62c1dc2ba2a565fbf"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "types": "src/types.d.ts"
+}
