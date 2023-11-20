@@ -4,38 +4,81 @@ package ares;
 message Packet {
   oneof type {
     ChunkLoad chunkLoad = 1;
-    PlayerSpawn playerSpawn = 2;
-    ConnectionRequest connectionRequest = 3;
-    ConnectionResponse connectionResponse = 4;
+    ListCharactersResponse listCharactersResponse = 2;
+    ConnectionSuccess connectionSuccess = 3;
+    Error error = 4;
+    CreateCharacter createCharacter = 5;
+    ListCharacters listCharacters = 6;
+    SelectCharacter selectCharacter = 7;
+    SpawnPlayer spawnPlayer = 8;
   }
 }
 
-// ========================================
+// ======================================== [SERVER -> CLIENT]
 // Packets sent from the server to the client
 
 // request to load chunk
 message ChunkLoad {
-  sint32 x = 1;
-  sint32 z = 2;
+  ChunkPosition position = 1;
 }
 
-// spawn the player
-message PlayerSpawn {
+// return the player's characters list
+message ListCharactersResponse {
+  repeated Character characters = 1;
+  uint32 limit = 2;
+}
+
+// notify the client that the connection was successful
+message ConnectionSuccess {
+}
+
+message SpawnPlayer {
+  Position position = 1;
+}
+
+message Error {
+  enum ErrorCode {
+    CHARACTERS_LIMIT_REACHED = 0;
+    CHARACTER_NOT_FOUND = 1;
+  }
+
+  ErrorCode code = 1;
+}
+
+// ======================================== [CLIENT -> SERVER]
+// Packets sent from the client to the server
+
+// request to create a new character, the server will respond with a ListCharactersResponse
+message CreateCharacter {
+  string name = 1;
+}
+
+// request to load characters list, the server will respond with a ListCharactersResponse
+message ListCharacters {
+}
+
+// request to select a character, the server will start sending ChunkLoad packets
+message SelectCharacter {
+  string id = 1;
+}
+
+// ========================================
+// Types used by both client and server
+
+message Position {
   float x = 1;
   float y = 2;
   float z = 3;
 }
 
-// accept the connection
-message ConnectionResponse {
-  bool accepted = 1;
-  string id = 2;
+message ChunkPosition {
+  sint32 x = 1;
+  sint32 z = 2;
 }
 
-// ========================================
-// Packets sent from the client to the server
-
-// request to connect
-message ConnectionRequest {
-  string name = 1;
+message Character {
+  string id = 1;
+  string name = 2;
+  Position position = 3;
+  uint32 level = 4;
 }

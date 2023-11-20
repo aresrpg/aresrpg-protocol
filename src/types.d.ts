@@ -67,35 +67,46 @@ export module 'events' {
   }
 }
 
-export function create_client({ user, socket_write, socket_end }): create_client
+export function create_client({ socket_write, socket_end }): create_client
 
-interface create_client extends TypedEmitter<Packets> {
+interface create_client {
+  controller: AbortController
+  stream: NodeJS.ReadWriteStream
   send: <T extends keyof Packets>(type: T, payload: Packets[T]) => void
   end: (message: string) => void
-  handle_error: (error: Error) => void
-  handle_message: (message: ArrayBuffer) => void
+  on_end: (cb) => void
+  notify_end: (message: string) => void
+  notify_message: (message: ArrayBuffer) => void
+}
+
+type Position = {
+  x: number
+  y: number
+  z: number
+}
+
+type ChunkPosition = {
+  x: number
+  z: number
+}
+
+export type Character = {
+  id: string
+  name: string
+  position: Position
+  level: number
 }
 
 export type Packets = {
   packet: { type: string; payload: any }
-  'packet/lightAdd': { type: string; [key: string]: any }
-  'packet/entityAdd': {
-    id: string
-    type: string
-    position: [number, number, number]
-    [key: string]: any
-  }
-  'packet/entityAttach': {
-    id: string
-    parent: string
-    offset: [number, number, number]
-  }
-  'packet/entityPosition': { id: string; position: [number, number, number] }
-  'packet/playerPosition': [number, number, number]
-  'packet/playerSpawn': [number, number, number]
-  'packet/chunkLoad': [number, number]
-  'packet/connectionRequest': { name: string }
-  'packet/connectionResponse': { accepted: boolean; id: string }
+  'packet/chunkLoad': { position: { x; z } }
+  'packet/listCharacters': object
+  'packet/createCharacter': { name: string }
+  'packet/selectCharacter': { id: string }
+  'packet/listCharactersResponse': { characters: Character[]; limit: number }
+  'packet/error': { code: string }
+  'packet/connectionSuccess': object
+  'packet/spawnPlayer': { position: Position }
 }
 
 type Packet = {

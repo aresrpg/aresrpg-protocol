@@ -10,14 +10,13 @@
   "dependencies": {
     "@bufbuild/buf": "^1.28.1",
     "@bufbuild/protobuf": "^1.4.2",
-    "@bufbuild/protoc-gen-es": "^1.4.2",
-    "events-polyfill": "gist:e2c3b3969513bbd62c1dc2ba2a565fbf"
-  },
-  "devDependencies": {
-    "typescript": "5.1.6"
+    "@bufbuild/protoc-gen-es": "^1.4.2"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "types": "src/types.d.ts"
+  "types": "src/types.d.ts",
+  "devDependencies": {
+    "@types/node": "^20.9.2"
+  }
 }

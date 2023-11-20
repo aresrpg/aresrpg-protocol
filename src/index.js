@@ -1,41 +1,50 @@
-import { EventEmitter } from 'events-polyfill'
-
+import { PassThrough } from 'stream'
 import * as Packets from '../generated/ares_pb.js'
 
-export function create_client({ user, socket_write, socket_end }) {
-  const emitter = new EventEmitter()
+export function create_client({ socket_write, socket_end }) {
+  const controller = new AbortController()
+  const stream = new PassThrough({
+    objectMode: true,
+    signal: controller.signal,
+  })
 
-  emitter.user = user
+  let end_handler = _ => {}
 
-  emitter.send = (raw_type, data) => {
-    const type = raw_type.slice(7)
-    try {
-      const buffer = Packets.Packet.fromJson({ [type]: data }).toBinary()
-      socket_write(buffer)
-    } catch (error) {
-      console.error(`'${type}' is not a valid packet !`, error)
-    }
+  return {
+    controller,
+    stream,
+    send(raw_type, data) {
+      const type = raw_type.slice(7)
+      try {
+        const buffer = Packets.Packet.fromJson({ [type]: data }).toBinary()
+        socket_write(buffer)
+      } catch (error) {
+        console.error(`'${type}' is not a valid packet !`, error)
+      }
+    },
+    end(message) {
+      end_handler(message)
+      controller.abort()
+      socket_end(message)
+    },
+    on_end: handler => (end_handler = handler),
+    notify_end: message => {
+      end_handler(message)
+      controller.abort()
+    },
+    notify_message(message) {
+      try {
+        const {
+          type: { value, case: type },
+        } = Packets.Packet.fromBinary(new Uint8Array(message))
+
+        if (!type) throw new Error('Invalid packet')
+
+        stream.write({ type: `packet/${type}`, payload: value })
+      } catch (error) {
+        console.error(error)
+        socket_end('Invalid packet')
+      }
+    },
   }
-  emitter.end = message => {
-    emitter.emit('close', message)
-    socket_end(message)
-  }
-  emitter.handle_error = error => emitter.end(error.message)
-  emitter.handle_message = message => {
-    try {
-      const {
-        type: { value, case: type },
-      } = Packets.Packet.fromBinary(new Uint8Array(message))
-
-      if (!type) throw new Error('Invalid packet')
-
-      emitter.emit('packet', { type, value })
-      emitter.emit(type, value)
-    } catch (error) {
-      console.error(error)
-      emitter.end('Invalid packet')
-    }
-  }
-
-  return emitter
 }

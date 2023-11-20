@@ -12,9 +12,13 @@ export const Packet = proto3.makeMessageType(
   "ares.Packet",
   () => [
     { no: 1, name: "chunkLoad", kind: "message", T: ChunkLoad, oneof: "type" },
-    { no: 2, name: "playerSpawn", kind: "message", T: PlayerSpawn, oneof: "type" },
-    { no: 3, name: "connectionRequest", kind: "message", T: ConnectionRequest, oneof: "type" },
-    { no: 4, name: "connectionResponse", kind: "message", T: ConnectionResponse, oneof: "type" },
+    { no: 2, name: "listCharactersResponse", kind: "message", T: ListCharactersResponse, oneof: "type" },
+    { no: 3, name: "connectionSuccess", kind: "message", T: ConnectionSuccess, oneof: "type" },
+    { no: 4, name: "error", kind: "message", T: Error, oneof: "type" },
+    { no: 5, name: "createCharacter", kind: "message", T: CreateCharacter, oneof: "type" },
+    { no: 6, name: "listCharacters", kind: "message", T: ListCharacters, oneof: "type" },
+    { no: 7, name: "selectCharacter", kind: "message", T: SelectCharacter, oneof: "type" },
+    { no: 8, name: "spawnPlayer", kind: "message", T: SpawnPlayer, oneof: "type" },
   ],
 );
 
@@ -26,18 +30,103 @@ export const Packet = proto3.makeMessageType(
 export const ChunkLoad = proto3.makeMessageType(
   "ares.ChunkLoad",
   () => [
-    { no: 1, name: "x", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
-    { no: 2, name: "z", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
+    { no: 1, name: "position", kind: "message", T: ChunkPosition },
   ],
 );
 
 /**
- * spawn the player
+ * return the player's characters list
  *
- * @generated from message ares.PlayerSpawn
+ * @generated from message ares.ListCharactersResponse
  */
-export const PlayerSpawn = proto3.makeMessageType(
-  "ares.PlayerSpawn",
+export const ListCharactersResponse = proto3.makeMessageType(
+  "ares.ListCharactersResponse",
+  () => [
+    { no: 1, name: "characters", kind: "message", T: Character, repeated: true },
+    { no: 2, name: "limit", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ],
+);
+
+/**
+ * notify the client that the connection was successful
+ *
+ * @generated from message ares.ConnectionSuccess
+ */
+export const ConnectionSuccess = proto3.makeMessageType(
+  "ares.ConnectionSuccess",
+  [],
+);
+
+/**
+ * @generated from message ares.SpawnPlayer
+ */
+export const SpawnPlayer = proto3.makeMessageType(
+  "ares.SpawnPlayer",
+  () => [
+    { no: 1, name: "position", kind: "message", T: Position },
+  ],
+);
+
+/**
+ * @generated from message ares.Error
+ */
+export const Error = proto3.makeMessageType(
+  "ares.Error",
+  () => [
+    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(Error_ErrorCode) },
+  ],
+);
+
+/**
+ * @generated from enum ares.Error.ErrorCode
+ */
+export const Error_ErrorCode = proto3.makeEnum(
+  "ares.Error.ErrorCode",
+  [
+    {no: 0, name: "CHARACTERS_LIMIT_REACHED"},
+    {no: 1, name: "CHARACTER_NOT_FOUND"},
+  ],
+);
+
+/**
+ * request to create a new character, the server will respond with a ListCharactersResponse
+ *
+ * @generated from message ares.CreateCharacter
+ */
+export const CreateCharacter = proto3.makeMessageType(
+  "ares.CreateCharacter",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * request to load characters list, the server will respond with a ListCharactersResponse
+ *
+ * @generated from message ares.ListCharacters
+ */
+export const ListCharacters = proto3.makeMessageType(
+  "ares.ListCharacters",
+  [],
+);
+
+/**
+ * request to select a character, the server will start sending ChunkLoad packets
+ *
+ * @generated from message ares.SelectCharacter
+ */
+export const SelectCharacter = proto3.makeMessageType(
+  "ares.SelectCharacter",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message ares.Position
+ */
+export const Position = proto3.makeMessageType(
+  "ares.Position",
   () => [
     { no: 1, name: "x", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 2, name: "y", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
@@ -46,27 +135,26 @@ export const PlayerSpawn = proto3.makeMessageType(
 );
 
 /**
- * accept the connection
- *
- * @generated from message ares.ConnectionResponse
+ * @generated from message ares.ChunkPosition
  */
-export const ConnectionResponse = proto3.makeMessageType(
-  "ares.ConnectionResponse",
+export const ChunkPosition = proto3.makeMessageType(
+  "ares.ChunkPosition",
   () => [
-    { no: 1, name: "accepted", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "x", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
+    { no: 2, name: "z", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
   ],
 );
 
 /**
- * request to connect
- *
- * @generated from message ares.ConnectionRequest
+ * @generated from message ares.Character
  */
-export const ConnectionRequest = proto3.makeMessageType(
-  "ares.ConnectionRequest",
+export const Character = proto3.makeMessageType(
+  "ares.Character",
   () => [
-    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "position", kind: "message", T: Position },
+    { no: 4, name: "level", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ],
 );
 
