@@ -10,7 +10,7 @@ message Packet {
     CreateCharacter createCharacter = 5;
     ListCharacters listCharacters = 6;
     SelectCharacter selectCharacter = 7;
-    SpawnPlayer spawnPlayer = 8;
+    PlayerPosition playerPosition = 8;
   }
 }
 
@@ -32,7 +32,8 @@ message ListCharactersResponse {
 message ConnectionSuccess {
 }
 
-message SpawnPlayer {
+// notify the client that the player's position must be enforced
+message PlayerPosition {
   Position position = 1;
 }
 

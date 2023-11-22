@@ -18,7 +18,7 @@ export const Packet = proto3.makeMessageType(
     { no: 5, name: "createCharacter", kind: "message", T: CreateCharacter, oneof: "type" },
     { no: 6, name: "listCharacters", kind: "message", T: ListCharacters, oneof: "type" },
     { no: 7, name: "selectCharacter", kind: "message", T: SelectCharacter, oneof: "type" },
-    { no: 8, name: "spawnPlayer", kind: "message", T: SpawnPlayer, oneof: "type" },
+    { no: 8, name: "playerPosition", kind: "message", T: PlayerPosition, oneof: "type" },
   ],
 );
 
@@ -58,10 +58,12 @@ export const ConnectionSuccess = proto3.makeMessageType(
 );
 
 /**
- * @generated from message ares.SpawnPlayer
+ * notify the client that the player's position must be enforced
+ *
+ * @generated from message ares.PlayerPosition
  */
-export const SpawnPlayer = proto3.makeMessageType(
-  "ares.SpawnPlayer",
+export const PlayerPosition = proto3.makeMessageType(
+  "ares.PlayerPosition",
   () => [
     { no: 1, name: "position", kind: "message", T: Position },
   ],

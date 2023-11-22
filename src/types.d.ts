@@ -106,7 +106,7 @@ export type Packets = {
   'packet/listCharactersResponse': { characters: Character[]; limit: number }
   'packet/error': { code: string }
   'packet/connectionSuccess': object
-  'packet/spawnPlayer': { position: Position }
+  'packet/playerPosition': { position: Position }
 }
 
 type Packet = {
