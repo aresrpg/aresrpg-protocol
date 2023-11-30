@@ -21,12 +21,11 @@ export function create_client({ socket_write, socket_end }) {
         const buffer = Packets.Packet.fromJson({ [type]: data }).toBinary()
         socket_write(buffer)
       } catch (error) {
-        console.error(`'${type}' is not a valid packet !`, error)
+        console.dir({ type, data }, { depth: Infinity })
+        console.error(error)
       }
     },
     end(message) {
-      end_handler(message)
-      controller.abort()
       socket_end(message)
     },
     on_end: handler => (end_handler = handler),

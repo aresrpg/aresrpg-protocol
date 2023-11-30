@@ -75,7 +75,6 @@ interface create_client {
   send: <T extends keyof Packets>(type: T, payload: Packets[T]) => void
   end: (message: string) => void
   on_end: (cb) => void
-  notify_end: (message: string) => void
   notify_message: (message: ArrayBuffer) => void
 }
 
@@ -95,6 +94,8 @@ export type Character = {
   name: string
   position: Position
   level: number
+  head: number
+  cape: number
 }
 
 export type Packets = {
@@ -107,6 +108,12 @@ export type Packets = {
   'packet/error': { code: string }
   'packet/connectionSuccess': object
   'packet/playerPosition': { position: Position }
+  'packet/leaveGame': object
+  'packet/joinGame': object
+  'packet/joinGameReady': object
+  'packet/entitySpawn': { id: string; type: string; position: Position }
+  'packet/entityMove': { id: string; type: string; position: Position }
+  'packet/entityDespawn': { id: string }
 }
 
 type Packet = {

@@ -6,6 +6,28 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum ares.EntityType
+ */
+export const EntityType = proto3.makeEnum(
+  "ares.EntityType",
+  [
+    {no: 0, name: "PLAYER"},
+    {no: 1, name: "CREATURE"},
+    {no: 2, name: "NPC"},
+  ],
+);
+
+/**
+ * @generated from enum ares.ErrorCode
+ */
+export const ErrorCode = proto3.makeEnum(
+  "ares.ErrorCode",
+  [
+    {no: 0, name: "CREATE_CHARACTER_NAME_TAKEN"},
+  ],
+);
+
+/**
  * @generated from message ares.Packet
  */
 export const Packet = proto3.makeMessageType(
@@ -14,11 +36,17 @@ export const Packet = proto3.makeMessageType(
     { no: 1, name: "chunkLoad", kind: "message", T: ChunkLoad, oneof: "type" },
     { no: 2, name: "listCharactersResponse", kind: "message", T: ListCharactersResponse, oneof: "type" },
     { no: 3, name: "connectionSuccess", kind: "message", T: ConnectionSuccess, oneof: "type" },
-    { no: 4, name: "error", kind: "message", T: Error, oneof: "type" },
-    { no: 5, name: "createCharacter", kind: "message", T: CreateCharacter, oneof: "type" },
-    { no: 6, name: "listCharacters", kind: "message", T: ListCharacters, oneof: "type" },
-    { no: 7, name: "selectCharacter", kind: "message", T: SelectCharacter, oneof: "type" },
-    { no: 8, name: "playerPosition", kind: "message", T: PlayerPosition, oneof: "type" },
+    { no: 4, name: "createCharacter", kind: "message", T: CreateCharacter, oneof: "type" },
+    { no: 5, name: "listCharacters", kind: "message", T: ListCharacters, oneof: "type" },
+    { no: 6, name: "selectCharacter", kind: "message", T: SelectCharacter, oneof: "type" },
+    { no: 7, name: "playerPosition", kind: "message", T: PlayerPosition, oneof: "type" },
+    { no: 8, name: "entityMove", kind: "message", T: EntityMove, oneof: "type" },
+    { no: 9, name: "leaveGame", kind: "message", T: LeaveGame, oneof: "type" },
+    { no: 10, name: "joinGame", kind: "message", T: JoinGame, oneof: "type" },
+    { no: 11, name: "joinGameReady", kind: "message", T: JoinGameReady, oneof: "type" },
+    { no: 12, name: "entitySpawn", kind: "message", T: EntitySpawn, oneof: "type" },
+    { no: 13, name: "entityDespawn", kind: "message", T: EntityDespawn, oneof: "type" },
+    { no: 14, name: "error", kind: "message", T: Error, oneof: "type" },
   ],
 );
 
@@ -58,14 +86,43 @@ export const ConnectionSuccess = proto3.makeMessageType(
 );
 
 /**
- * notify the client that the player's position must be enforced
- *
- * @generated from message ares.PlayerPosition
+ * @generated from message ares.EntityMove
  */
-export const PlayerPosition = proto3.makeMessageType(
-  "ares.PlayerPosition",
+export const EntityMove = proto3.makeMessageType(
+  "ares.EntityMove",
   () => [
-    { no: 1, name: "position", kind: "message", T: Position },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "position", kind: "message", T: Position },
+  ],
+);
+
+/**
+ * @generated from message ares.JoinGame
+ */
+export const JoinGame = proto3.makeMessageType(
+  "ares.JoinGame",
+  [],
+);
+
+/**
+ * @generated from message ares.EntitySpawn
+ */
+export const EntitySpawn = proto3.makeMessageType(
+  "ares.EntitySpawn",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "position", kind: "message", T: Position },
+    { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(EntityType) },
+  ],
+);
+
+/**
+ * @generated from message ares.EntityDespawn
+ */
+export const EntityDespawn = proto3.makeMessageType(
+  "ares.EntityDespawn",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -75,18 +132,7 @@ export const PlayerPosition = proto3.makeMessageType(
 export const Error = proto3.makeMessageType(
   "ares.Error",
   () => [
-    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(Error_ErrorCode) },
-  ],
-);
-
-/**
- * @generated from enum ares.Error.ErrorCode
- */
-export const Error_ErrorCode = proto3.makeEnum(
-  "ares.Error.ErrorCode",
-  [
-    {no: 0, name: "CHARACTERS_LIMIT_REACHED"},
-    {no: 1, name: "CHARACTER_NOT_FOUND"},
+    { no: 1, name: "code", kind: "enum", T: proto3.getEnumType(ErrorCode) },
   ],
 );
 
@@ -125,6 +171,38 @@ export const SelectCharacter = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message ares.JoinGameReady
+ */
+export const JoinGameReady = proto3.makeMessageType(
+  "ares.JoinGameReady",
+  [],
+);
+
+/**
+ * the client is going back to the main menu
+ *
+ * @generated from message ares.LeaveGame
+ */
+export const LeaveGame = proto3.makeMessageType(
+  "ares.LeaveGame",
+  [],
+);
+
+/**
+ * notify the other party that the player moved
+ * when the server receives it he stores the position
+ * when the client receives it he updates the position
+ *
+ * @generated from message ares.PlayerPosition
+ */
+export const PlayerPosition = proto3.makeMessageType(
+  "ares.PlayerPosition",
+  () => [
+    { no: 1, name: "position", kind: "message", T: Position },
+  ],
+);
+
+/**
  * @generated from message ares.Position
  */
 export const Position = proto3.makeMessageType(
@@ -155,8 +233,9 @@ export const Character = proto3.makeMessageType(
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "position", kind: "message", T: Position },
-    { no: 4, name: "level", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "level", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "head", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 5, name: "cape", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ],
 );
 

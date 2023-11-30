@@ -6,11 +6,17 @@ message Packet {
     ChunkLoad chunkLoad = 1;
     ListCharactersResponse listCharactersResponse = 2;
     ConnectionSuccess connectionSuccess = 3;
-    Error error = 4;
-    CreateCharacter createCharacter = 5;
-    ListCharacters listCharacters = 6;
-    SelectCharacter selectCharacter = 7;
-    PlayerPosition playerPosition = 8;
+    CreateCharacter createCharacter = 4;
+    ListCharacters listCharacters = 5;
+    SelectCharacter selectCharacter = 6;
+    PlayerPosition playerPosition = 7;
+    EntityMove entityMove = 8;
+    LeaveGame leaveGame = 9;
+    JoinGame joinGame = 10;
+    JoinGameReady joinGameReady = 11;
+    EntitySpawn entitySpawn = 12;
+    EntityDespawn entityDespawn = 13;
+    Error error = 14;
   }
 }
 
@@ -32,17 +38,25 @@ message ListCharactersResponse {
 message ConnectionSuccess {
 }
 
-// notify the client that the player's position must be enforced
-message PlayerPosition {
-  Position position = 1;
+message EntityMove {
+  string id = 1;
+  Position position = 2;
+}
+
+message JoinGame {
+}
+
+message EntitySpawn {
+  string id = 1;
+  Position position = 2;
+  EntityType type = 3;
+}
+
+message EntityDespawn {
+  string id = 1;
 }
 
 message Error {
-  enum ErrorCode {
-    CHARACTERS_LIMIT_REACHED = 0;
-    CHARACTER_NOT_FOUND = 1;
-  }
-
   ErrorCode code = 1;
 }
 
@@ -63,6 +77,21 @@ message SelectCharacter {
   string id = 1;
 }
 
+message JoinGameReady {}
+
+// the client is going back to the main menu
+message LeaveGame {}
+
+// ======================================== [CLIENT <-> SERVER]
+// Packets used by both client and server
+
+// notify the other party that the player moved
+// when the server receives it he stores the position
+// when the client receives it he updates the position
+message PlayerPosition {
+  Position position = 1;
+}
+
 // ========================================
 // Types used by both client and server
 
@@ -80,6 +109,17 @@ message ChunkPosition {
 message Character {
   string id = 1;
   string name = 2;
-  Position position = 3;
-  uint32 level = 4;
+  uint32 level = 3;
+  uint32 head = 4;
+  uint32 cape = 5;
+}
+
+enum EntityType {
+  PLAYER = 0;
+  CREATURE = 1;
+  NPC = 2;
+}
+
+enum ErrorCode {
+  CREATE_CHARACTER_NAME_TAKEN = 0;
 }

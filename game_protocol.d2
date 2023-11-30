@@ -1,0 +1,54 @@
+shape: sequence_diagram
+client; server; cluster
+
+client.shape: person
+cluster.style.multiple: true
+
+client.t -> server.t: ( packet/joinGameReady )
+server.t -> client.t: ( packet/chunkLoad )
+server.t -> cluster.t: |md Subscribe
+- chunk: { x, z }
+- chunk around
+|
+server.t -> client.t: ( packet/playerPosition )
+server.t -> cluster.t: |md broadcast/entitySpawn
+- chunk: { x, z }
+|
+
+client."Client joined the game"
+
+Player is leaving: {
+  client.t0 -> server.t0: ( packet/leaveGame )
+  server.t0 -> cluster.t0: |md Unsubscribe
+  - chunk: { x, z }
+  - chunk around
+  |
+  server.t0 -> cluster.t0: |md broadcast/entityDespawn |
+  server.t0 -> server.t0: selected_character = null
+}
+
+Player is moving: {
+  client.t2 -> server.t2: ( packet/playerPosition )
+  server.t2 -> cluster.t2: |md update tracking
+  - chunk: { x, z }
+  - chunk around
+  |
+  server.t2 -> cluster.t2: |md broadcast/entityMove
+  - chunk: { x, z }
+  |
+}
+
+server."Server entities and players"
+
+The chunk is tracked: {
+  cluster.t4 -> server.t4: |md broadcast/entityMove |
+  server.t4 -> client.t4: |md packet/entitySpawn
+( if just moved to the chunk )
+  |
+  server.t4 -> client.t4: ( packet/entityMove )
+  server.t4 -> client.t4: |md packet/entityDespawn
+( if just moved away )
+  |
+  cluster.t5 -> server.t5: |md broadcast/entityDespawn |
+  server.t5 -> client.t5: ( packet/entityDespawn )
+}
