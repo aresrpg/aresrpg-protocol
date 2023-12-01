@@ -24,6 +24,18 @@ export const ErrorCode = proto3.makeEnum(
   "ares.ErrorCode",
   [
     {no: 0, name: "CREATE_CHARACTER_NAME_TAKEN"},
+    {no: 1, name: "NO_BETA_ACCESS"},
+  ],
+);
+
+/**
+ * @generated from enum ares.Action
+ */
+export const Action = proto3.makeEnum(
+  "ares.Action",
+  [
+    {no: 0, name: "JUMP"},
+    {no: 1, name: "DANCE"},
   ],
 );
 
@@ -47,6 +59,7 @@ export const Packet = proto3.makeMessageType(
     { no: 12, name: "entitySpawn", kind: "message", T: EntitySpawn, oneof: "type" },
     { no: 13, name: "entityDespawn", kind: "message", T: EntityDespawn, oneof: "type" },
     { no: 14, name: "error", kind: "message", T: Error, oneof: "type" },
+    { no: 15, name: "entityAction", kind: "message", T: EntityAction, oneof: "type" },
   ],
 );
 
@@ -199,6 +212,17 @@ export const PlayerPosition = proto3.makeMessageType(
   "ares.PlayerPosition",
   () => [
     { no: 1, name: "position", kind: "message", T: Position },
+  ],
+);
+
+/**
+ * @generated from message ares.EntityAction
+ */
+export const EntityAction = proto3.makeMessageType(
+  "ares.EntityAction",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "action", kind: "enum", T: proto3.getEnumType(Action) },
   ],
 );
 

@@ -17,6 +17,7 @@ message Packet {
     EntitySpawn entitySpawn = 12;
     EntityDespawn entityDespawn = 13;
     Error error = 14;
+    EntityAction entityAction = 15;
   }
 }
 
@@ -92,6 +93,11 @@ message PlayerPosition {
   Position position = 1;
 }
 
+message EntityAction {
+  string id = 1;
+  Action action = 2;
+}
+
 // ========================================
 // Types used by both client and server
 
@@ -122,4 +128,10 @@ enum EntityType {
 
 enum ErrorCode {
   CREATE_CHARACTER_NAME_TAKEN = 0;
+  NO_BETA_ACCESS = 1;
+}
+
+enum Action {
+  JUMP = 0;
+  DANCE = 1;
 }

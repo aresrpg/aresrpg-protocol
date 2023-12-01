@@ -114,6 +114,7 @@ export type Packets = {
   'packet/entitySpawn': { id: string; type: string; position: Position }
   'packet/entityMove': { id: string; type: string; position: Position }
   'packet/entityDespawn': { id: string }
+  'packet/entityAction': { id: string; action: string }
 }
 
 type Packet = {
