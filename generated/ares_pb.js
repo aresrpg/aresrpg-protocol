@@ -45,7 +45,7 @@ export const Action = proto3.makeEnum(
 export const Packet = proto3.makeMessageType(
   "ares.Packet",
   () => [
-    { no: 1, name: "chunkLoad", kind: "message", T: ChunkLoad, oneof: "type" },
+    { no: 1, name: "worldSeed", kind: "message", T: WorldSeed, oneof: "type" },
     { no: 2, name: "listCharactersResponse", kind: "message", T: ListCharactersResponse, oneof: "type" },
     { no: 3, name: "connectionSuccess", kind: "message", T: ConnectionSuccess, oneof: "type" },
     { no: 4, name: "createCharacter", kind: "message", T: CreateCharacter, oneof: "type" },
@@ -64,14 +64,14 @@ export const Packet = proto3.makeMessageType(
 );
 
 /**
- * request to load chunk
+ * change the seed for the world
  *
- * @generated from message ares.ChunkLoad
+ * @generated from message ares.WorldSeed
  */
-export const ChunkLoad = proto3.makeMessageType(
-  "ares.ChunkLoad",
+export const WorldSeed = proto3.makeMessageType(
+  "ares.WorldSeed",
   () => [
-    { no: 1, name: "position", kind: "message", T: ChunkPosition },
+    { no: 1, name: "seed", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -235,17 +235,6 @@ export const Position = proto3.makeMessageType(
     { no: 1, name: "x", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 2, name: "y", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 3, name: "z", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
-  ],
-);
-
-/**
- * @generated from message ares.ChunkPosition
- */
-export const ChunkPosition = proto3.makeMessageType(
-  "ares.ChunkPosition",
-  () => [
-    { no: 1, name: "x", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
-    { no: 2, name: "z", kind: "scalar", T: 17 /* ScalarType.SINT32 */ },
   ],
 );
 

@@ -84,11 +84,6 @@ type Position = {
   z: number
 }
 
-type ChunkPosition = {
-  x: number
-  z: number
-}
-
 export type Character = {
   id: string
   name: string
@@ -100,7 +95,6 @@ export type Character = {
 
 export type Packets = {
   packet: { type: string; payload: any }
-  'packet/chunkLoad': { position: { x; z } }
   'packet/listCharacters': object
   'packet/createCharacter': { name: string }
   'packet/selectCharacter': { id: string }
@@ -115,6 +109,7 @@ export type Packets = {
   'packet/entityMove': { id: string; type: string; position: Position }
   'packet/entityDespawn': { id: string }
   'packet/entityAction': { id: string; action: string }
+  'packet/worldSeed': string
 }
 
 type Packet = {

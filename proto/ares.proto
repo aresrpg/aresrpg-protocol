@@ -3,7 +3,7 @@ package ares;
 
 message Packet {
   oneof type {
-    ChunkLoad chunkLoad = 1;
+    WorldSeed worldSeed = 1;
     ListCharactersResponse listCharactersResponse = 2;
     ConnectionSuccess connectionSuccess = 3;
     CreateCharacter createCharacter = 4;
@@ -24,9 +24,9 @@ message Packet {
 // ======================================== [SERVER -> CLIENT]
 // Packets sent from the server to the client
 
-// request to load chunk
-message ChunkLoad {
-  ChunkPosition position = 1;
+// change the seed for the world
+message WorldSeed {
+  string seed = 1;
 }
 
 // return the player's characters list
@@ -105,11 +105,6 @@ message Position {
   float x = 1;
   float y = 2;
   float z = 3;
-}
-
-message ChunkPosition {
-  sint32 x = 1;
-  sint32 z = 2;
 }
 
 message Character {
