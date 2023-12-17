@@ -124,8 +124,9 @@ export const EntitySpawn = proto3.makeMessageType(
   "ares.EntitySpawn",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "position", kind: "message", T: Position },
-    { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(EntityType) },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "position", kind: "message", T: Position },
+    { no: 4, name: "type", kind: "enum", T: proto3.getEnumType(EntityType) },
   ],
 );
 

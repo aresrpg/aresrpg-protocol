@@ -33,6 +33,9 @@ Player is moving: {
   - chunk: { x, z }
   - chunk around
   |
+  server.t2 -> cluster.t2: |md broadcast/entityEnterChunk
+  (if just moved in)
+  |
   server.t2 -> cluster.t2: |md broadcast/entityMove
   - chunk: { x, z }
   |
@@ -44,17 +47,17 @@ Player is moving: {
 server."Server entities and players"
 
 The chunk is tracked: {
-  cluster.t4 -> server.t4: |md broadcast/entityMove |
+  cluster.t4 -> server.t4: |md broadcast/entityEnterChunk |
   server.t4 -> client.t4: |md packet/entitySpawn
-( if just moved to the chunk )
-  |
-  server.t4 -> client.t4: ( packet/entityMove )
-  server.t4 -> client.t4: |md packet/entityDespawn
+  (if unknown) |
+  cluster.t5 -> server.t5: |md broadcast/entityMove |
+  server.t5 -> client.t5: ( packet/entityMove )
+  server.t5 -> client.t5: |md packet/entityDespawn
 ( if just moved away )
   |
-  cluster.t5 -> server.t5: |md broadcast/entityDespawn |
-  server.t5 -> client.t5: ( packet/entityDespawn )
+  cluster.t6 -> server.t6: |md broadcast/entityDespawn |
+  server.t6 -> client.t6: ( packet/entityDespawn )
 
-  cluster.t6 -> server.t6: |md broadcast/entityAction |
-  server.t6 -> client.t6: ( packet/entityAction )
+  cluster.t7 -> server.t7: |md broadcast/entityAction |
+  server.t7 -> client.t7: ( packet/entityAction )
 }

@@ -49,8 +49,9 @@ message JoinGame {
 
 message EntitySpawn {
   string id = 1;
-  Position position = 2;
-  EntityType type = 3;
+  string name = 2;
+  Position position = 3;
+  EntityType type = 4;
 }
 
 message EntityDespawn {

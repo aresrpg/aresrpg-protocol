@@ -1,7 +1,7 @@
 import { PassThrough } from 'stream'
 import * as Packets from '../generated/ares_pb.js'
 
-export { to_chunk_position, CHUNK_SIZE, WORLD_HEIGHT, spiral_array } from './chunk.js'
+export { to_chunk_position, CHUNK_SIZE, WORLD_HEIGHT, spiral_array, square_array } from './chunk.js'
 
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
