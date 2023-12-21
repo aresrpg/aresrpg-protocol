@@ -12,7 +12,7 @@ export function to_chunk_position(position) {
 }
 
 export function spiral_array(center, min_distance, max_distance) {
-  let positions = []
+  const positions = []
 
   // Determine the size of the spiral needed based on maxDistance
   const size = max_distance * 2 + 1
@@ -36,7 +36,7 @@ export function spiral_array(center, min_distance, max_distance) {
 }
 
 export function square_array(center, max_distance) {
-  let positions = []
+  const positions = []
 
   for (let x = center.x - max_distance; x <= center.x + max_distance; x++) {
     for (let z = center.z - max_distance; z <= center.z + max_distance; z++) {

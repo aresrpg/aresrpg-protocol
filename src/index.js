@@ -1,4 +1,5 @@
 import { PassThrough } from 'stream'
+
 import * as Packets from '../generated/ares_pb.js'
 
 export {
