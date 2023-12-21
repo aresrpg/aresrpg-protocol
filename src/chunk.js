@@ -1,7 +1,7 @@
 import spiral from 'spiralloop'
 
-export const CHUNK_SIZE = 32
-export const WORLD_HEIGHT = 256
+export const CHUNK_SIZE = 64
+export const WORLD_HEIGHT = 512
 
 export function to_chunk_position(position) {
   if (isNaN(position.x) || isNaN(position.z)) return null
@@ -23,7 +23,8 @@ export function spiral_array(center, min_distance, max_distance) {
     const adjusted_z = z - max_distance + center.z
 
     // Calculate Manhattan distance from the center
-    const distance = Math.abs(center.x - adjusted_x) + Math.abs(center.z - adjusted_z)
+    const distance =
+      Math.abs(center.x - adjusted_x) + Math.abs(center.z - adjusted_z)
 
     // Include positions within the specified distance range
     if (distance >= min_distance && distance <= max_distance) {

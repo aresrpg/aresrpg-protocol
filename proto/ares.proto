@@ -18,6 +18,7 @@ message Packet {
     EntityDespawn entityDespawn = 13;
     Error error = 14;
     EntityAction entityAction = 15;
+    ServerInfo serverInfo = 16;
   }
 }
 
@@ -60,6 +61,11 @@ message EntityDespawn {
 
 message Error {
   ErrorCode code = 1;
+}
+
+message ServerInfo {
+  uint32 online = 1;
+  uint32 max = 2;
 }
 
 // ======================================== [CLIENT -> SERVER]

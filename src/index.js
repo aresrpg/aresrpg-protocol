@@ -1,7 +1,13 @@
 import { PassThrough } from 'stream'
 import * as Packets from '../generated/ares_pb.js'
 
-export { to_chunk_position, CHUNK_SIZE, WORLD_HEIGHT, spiral_array, square_array } from './chunk.js'
+export {
+  to_chunk_position,
+  CHUNK_SIZE,
+  WORLD_HEIGHT,
+  spiral_array,
+  square_array,
+} from './chunk.js'
 
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
@@ -35,7 +41,9 @@ export function create_client({ socket_write, socket_end }) {
     },
     notify_message(message) {
       try {
-        const raw_packet = Packets.Packet.fromBinary(new Uint8Array(message)).toJson({
+        const raw_packet = Packets.Packet.fromBinary(
+          new Uint8Array(message),
+        ).toJson({
           emitDefaultValues: true,
         })
         const [[type, value]] = Object.entries(raw_packet)

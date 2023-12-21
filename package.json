@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "proto": "npx buf generate proto"
+    "proto": "npx buf generate proto",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@bufbuild/buf": "^1.28.1",
@@ -18,6 +19,7 @@
   "license": "ISC",
   "types": "src/types.d.ts",
   "devDependencies": {
+    "prettier": "3.1.0",
     "@types/node": "^20.9.2"
   }
 }

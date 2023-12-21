@@ -9,13 +9,19 @@ export interface TypedEmitter<T extends EventMap> {
   on<K extends EventName<T>>(eventName: K, listener: EventListener<T[K]>): this
   on(eventName: string | symbol, listener: (arg: any) => void): this
 
-  once<K extends EventName<T>>(eventName: K, listener: EventListener<T[K]>): this
+  once<K extends EventName<T>>(
+    eventName: K,
+    listener: EventListener<T[K]>,
+  ): this
   once(eventName: string | symbol, listener: (arg: any) => void): this
 
   off<K extends EventName<T>>(eventName: K, listener: EventListener<T[K]>): this
   off(eventName: string | symbol, listener: (arg: any) => void): this
 
-  removeListener<K extends EventName<T>>(eventName: K, listener: EventListener<T[K]>): this
+  removeListener<K extends EventName<T>>(
+    eventName: K,
+    listener: EventListener<T[K]>,
+  ): this
   removeListener(eventName: string | symbol, listener: (arg: any) => void): this
 
   emit<K extends EventName<T>>(eventName: K, arg: T[K]): boolean
@@ -33,36 +39,36 @@ export module 'events' {
   function on(
     emitter: NodeJS.EventEmitter | EventTarget,
     eventName: string,
-    options?: StaticEventEmitterOptions
+    options?: StaticEventEmitterOptions,
   ): AsyncIterableIterator<any>
   function on<T, K extends EventName<T>>(
     emitter: TypedEmitter<T> | EventTarget,
     eventName: K,
-    options?: StaticEventEmitterOptions
+    options?: StaticEventEmitterOptions,
   ): AsyncIterableIterator<[T[K]]>
   function on<T>(
     emitter: TypedEmitter<T> | EventTarget,
     eventName: string,
-    options?: StaticEventEmitterOptions
+    options?: StaticEventEmitterOptions,
   ): AsyncIterableIterator<any>
 
   class EventEmitter {
     static on(
       emitter: NodeJS.EventEmitter,
       eventName: string,
-      options?: StaticEventEmitterOptions
+      options?: StaticEventEmitterOptions,
     ): AsyncIterableIterator<any>
 
     static on<T, K extends EventName<T>>(
       emitter: TypedEmitter<T>,
       eventName: K,
-      options?: StaticEventEmitterOptions
+      options?: StaticEventEmitterOptions,
     ): AsyncIterableIterator<[T[K]]>
 
     static on<T>(
       emitter: TypedEmitter<T>,
       eventName: string,
-      options?: StaticEventEmitterOptions
+      options?: StaticEventEmitterOptions,
     ): AsyncIterableIterator<any>
   }
 }
@@ -110,6 +116,7 @@ export type Packets = {
   'packet/entityDespawn': { id: string }
   'packet/entityAction': { id: string; action: string }
   'packet/worldSeed': string
+  'packet/serverInfo': { online: number; max: number }
 }
 
 type Packet = {
