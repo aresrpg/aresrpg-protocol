@@ -109,7 +109,12 @@ export type Packets = {
   'packet/leaveGame': object
   'packet/joinGame': object
   'packet/joinGameReady': object
-  'packet/entitySpawn': { id: string; type: string; position: Position }
+  'packet/entitySpawn': {
+    id: string
+    type: string
+    position: Position
+    name: string
+  }
   'packet/entityMove': { id: string; type: string; position: Position }
   'packet/entityDespawn': { id: string }
   'packet/entityAction': { id: string; action: string }
