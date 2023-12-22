@@ -1,5 +1,3 @@
-import { protocol_emitter } from '.'
-
 type EventMap = Record<string, any>
 type Await<T> = T extends Promise<infer U> ? U : T
 type EventName<T extends EventMap> = string & keyof T

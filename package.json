@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "main": "src/index.js",
   "type": "module",
+  "typings": "types/src/index.d.ts",
   "scripts": {
     "proto": "npx buf generate proto",
     "lint": "eslint . && prettier . --check && npm run typecheck",
