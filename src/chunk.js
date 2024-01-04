@@ -1,7 +1,7 @@
 import spiral from 'spiralloop'
 
-export const CHUNK_SIZE = 64
-export const WORLD_HEIGHT = 512
+export const CHUNK_SIZE = 32
+export const WORLD_HEIGHT = 256
 
 export function to_chunk_position(position) {
   if (isNaN(position.x) || isNaN(position.z)) return null

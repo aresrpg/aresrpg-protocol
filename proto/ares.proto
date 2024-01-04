@@ -136,4 +136,7 @@ enum ErrorCode {
 enum Action {
   JUMP = 0;
   DANCE = 1;
+  WALK = 2;
+  RUN = 3;
+  SIT = 4;
 }

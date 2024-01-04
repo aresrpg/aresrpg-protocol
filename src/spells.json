@@ -1,0 +1,333 @@
+{
+  "iop": {
+    "slash": {
+      "name": "Slash",
+      "icon": "iop_slash",
+      "level": 1,
+      "description": "A quick, powerful strike dealing significant damage to a single target within close range.",
+      "levels": [
+        {
+          "cost": 5,
+          "range": [1, 2],
+          "critical_chance": [1, 100],
+          "area": 1,
+          "area_type": "square",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 0,
+          "modifiable_range": false,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": false,
+          "can_critical": true,
+          "base_effects": [
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "earth",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            },
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "air",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            },
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "water",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            },
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "fire",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            },
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "fire",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ],
+          "critical_effects": [
+            {
+              "min": 7,
+              "max": 12,
+              "on": "target",
+              "element": "earth",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ]
+        },
+        {
+          "cost": 4,
+          "range": [1, 2],
+          "critical_chance": [1, 100],
+          "area": 1,
+          "area_type": "square",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 0,
+          "modifiable_range": false,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": false,
+          "can_critical": true,
+          "base_effects": [
+            {
+              "min": 6,
+              "max": 13,
+              "on": "target",
+              "element": "earth",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ],
+          "critical_effects": [
+            {
+              "min": 7,
+              "max": 15,
+              "on": "target",
+              "element": "earth",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ]
+        }
+      ]
+    },
+    "jump": {
+      "name": "Jump",
+      "icon": "iop_jump",
+      "level": 1,
+      "description": "Jump to any targeted cell within range, bypassing obstacles and positioning for tactical advantages.",
+      "levels": [
+        {
+          "cost": 5,
+          "range": [1, 4],
+          "critical_chance": [1, 100],
+          "area": 1,
+          "area_type": "square",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 0,
+          "modifiable_range": false,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": true,
+          "can_critical": true,
+          "base_effects": [],
+          "critical_effects": []
+        }
+      ]
+    },
+    "rage": {
+      "name": "Rage",
+      "icon": "iop_rage",
+      "level": 1,
+      "description": "Boosts the damage output of the Iop or an ally for several turns, enhancing any attacks.",
+      "levels": [
+        {
+          "cost": 2,
+          "range": [0, 0],
+          "critical_chance": [1, 40],
+          "area": 2,
+          "area_type": "circle",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 4,
+          "modifiable_range": true,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": false,
+          "can_critical": true,
+          "base_effects": [
+            {
+              "min": 3,
+              "max": 7,
+              "on": "target",
+              "element": "raw",
+              "type": "add_damage",
+              "turns": 2,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ],
+          "critical_effects": [
+            {
+              "min": 5,
+              "max": 10,
+              "on": "target",
+              "element": "raw",
+              "type": "add_damage",
+              "turns": 3,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sram": {
+    "trap": {
+      "name": "Trap",
+      "icon": "sram_trap",
+      "level": 1,
+      "description": "Places an invisible trap on the ground that detonates for damage when an enemy steps on it.",
+      "levels": [
+        {
+          "cost": 4,
+          "range": [1, 4],
+          "critical_chance": [1, 100],
+          "area": 1,
+          "area_type": "square",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 0,
+          "modifiable_range": true,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": true,
+          "can_critical": false,
+          "base_effects": [
+            {
+              "min": 5,
+              "max": 9,
+              "on": "target",
+              "element": "earth",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ],
+          "critical_effects": []
+        }
+      ]
+    },
+    "unfazed": {
+      "name": "Unfazed",
+      "icon": "sram_unfazed",
+      "level": 1,
+      "description": "Grants immunity to trap effects for the turn and may heal or strengthen the Sram if he pass over one.",
+      "levels": [
+        {
+          "cost": 2,
+          "range": [0, 0],
+          "critical_chance": [1, 100],
+          "area": 1,
+          "area_type": "square",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 2,
+          "modifiable_range": true,
+          "line_of_sight": true,
+          "linear": false,
+          "free_cell": true,
+          "can_critical": true,
+          "base_effects": [
+            {
+              "min": 0,
+              "max": 0,
+              "on": "target",
+              "element": "raw",
+              "type": "heal",
+              "turns": 1,
+              "trigger": "trap",
+              "chance": 0.5
+            },
+            {
+              "min": 0,
+              "max": 0,
+              "on": "target",
+              "element": "raw",
+              "type": "add_damage",
+              "turns": 1,
+              "trigger": "trap",
+              "chance": 0.5
+            }
+          ],
+          "critical_effects": []
+        }
+      ]
+    },
+    "flying_soul": {
+      "name": "Flying Soul",
+      "icon": "sram_flying_soul",
+      "level": 1,
+      "description": "Sends out a soul projectile that deals damage to an enemy, effective at medium to long range.",
+      "levels": [
+        {
+          "cost": 6,
+          "range": [2, 4],
+          "critical_chance": [1, 100],
+          "area": 2,
+          "area_type": "line",
+          "casts_per_turn": 0,
+          "casts_per_target": 0,
+          "turns_to_recast": 0,
+          "modifiable_range": true,
+          "line_of_sight": true,
+          "linear": true,
+          "free_cell": false,
+          "can_critical": true,
+          "base_effects": [
+            {
+              "min": 6,
+              "max": 11,
+              "on": "target",
+              "element": "air",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ],
+          "critical_effects": [
+            {
+              "min": 12,
+              "max": 15,
+              "on": "target",
+              "element": "air",
+              "type": "damage",
+              "turns": 0,
+              "trigger": "immediate",
+              "chance": 100
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
