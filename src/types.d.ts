@@ -95,12 +95,14 @@ export type Character = {
   level: number
   head: number
   cape: number
+  classe: string
+  female: boolean
 }
 
 export type Packets = {
   packet: { type: string; payload: any }
   'packet/listCharacters': object
-  'packet/createCharacter': { name: string }
+  'packet/createCharacter': { name: string; classe: number; female: boolean }
   'packet/selectCharacter': { id: string }
   'packet/listCharactersResponse': { characters: Character[]; limit: number }
   'packet/error': { code: string }
@@ -114,6 +116,8 @@ export type Packets = {
     type: string
     position: Position
     name: string
+    classe?: string
+    female?: boolean
   }
   'packet/entityMove': { id: string; type: string; position: Position }
   'packet/entityDespawn': { id: string }

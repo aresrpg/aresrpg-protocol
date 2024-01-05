@@ -9,7 +9,7 @@
         {
           "cost": 5,
           "range": [1, 2],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 1,
           "area_type": "square",
           "casts_per_turn": 0,
@@ -22,73 +22,30 @@
           "can_critical": true,
           "base_effects": [
             {
+              "type": "damage",
               "min": 5,
               "max": 10,
-              "on": "target",
+              "target": "cell",
               "element": "earth",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
-              "chance": 100
-            },
-            {
-              "min": 5,
-              "max": 10,
-              "on": "target",
-              "element": "air",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
-              "chance": 100
-            },
-            {
-              "min": 5,
-              "max": 10,
-              "on": "target",
-              "element": "water",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
-              "chance": 100
-            },
-            {
-              "min": 5,
-              "max": 10,
-              "on": "target",
-              "element": "fire",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
-              "chance": 100
-            },
-            {
-              "min": 5,
-              "max": 10,
-              "on": "target",
-              "element": "fire",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
             }
           ],
           "critical_effects": [
             {
+              "type": "damage",
               "min": 7,
               "max": 12,
-              "on": "target",
+              "target": "cell",
               "element": "earth",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
-            }
+            },
+            { "type": "push", "distance": 1, "chance": 30 }
           ]
         },
         {
           "cost": 4,
           "range": [1, 2],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 1,
           "area_type": "square",
           "casts_per_turn": 0,
@@ -101,27 +58,24 @@
           "can_critical": true,
           "base_effects": [
             {
+              "type": "damage",
               "min": 6,
               "max": 13,
-              "on": "target",
+              "target": "cell",
               "element": "earth",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
             }
           ],
           "critical_effects": [
             {
+              "type": "damage",
               "min": 7,
               "max": 15,
-              "on": "target",
+              "target": "cell",
               "element": "earth",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
-            }
+            },
+            { "type": "push", "distance": 1, "chance": 30 }
           ]
         }
       ]
@@ -135,7 +89,7 @@
         {
           "cost": 5,
           "range": [1, 4],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 1,
           "area_type": "square",
           "casts_per_turn": 0,
@@ -145,8 +99,8 @@
           "line_of_sight": true,
           "linear": false,
           "free_cell": true,
-          "can_critical": true,
-          "base_effects": [],
+          "can_critical": false,
+          "base_effects": [{ "type": "teleport", "chance": 100 }],
           "critical_effects": []
         }
       ]
@@ -160,7 +114,7 @@
         {
           "cost": 2,
           "range": [0, 0],
-          "critical_chance": [1, 40],
+          "critical_chance": 40,
           "area": 2,
           "area_type": "circle",
           "casts_per_turn": 0,
@@ -173,26 +127,24 @@
           "can_critical": true,
           "base_effects": [
             {
+              "type": "add",
               "min": 3,
               "max": 7,
-              "on": "target",
-              "element": "raw",
-              "type": "add_damage",
+              "target": "cell",
+              "chance": 100,
               "turns": 2,
-              "trigger": "immediate",
-              "chance": 100
+              "statistic": "damage"
             }
           ],
           "critical_effects": [
             {
+              "type": "add",
               "min": 5,
               "max": 10,
-              "on": "target",
-              "element": "raw",
-              "type": "add_damage",
+              "target": "cell",
+              "chance": 100,
               "turns": 3,
-              "trigger": "immediate",
-              "chance": 100
+              "statistic": "damage"
             }
           ]
         }
@@ -209,7 +161,7 @@
         {
           "cost": 4,
           "range": [1, 4],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 1,
           "area_type": "square",
           "casts_per_turn": 0,
@@ -222,14 +174,21 @@
           "can_critical": false,
           "base_effects": [
             {
+              "type": "damage",
               "min": 5,
               "max": 9,
-              "on": "target",
+              "target": "trap",
               "element": "earth",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
+            },
+            {
+              "type": "poison",
+              "min": 1,
+              "max": 3,
+              "target": "trap",
+              "element": "air",
+              "chance": 10,
+              "turns": 2
             }
           ],
           "critical_effects": []
@@ -245,12 +204,12 @@
         {
           "cost": 2,
           "range": [0, 0],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 1,
           "area_type": "square",
           "casts_per_turn": 0,
           "casts_per_target": 0,
-          "turns_to_recast": 2,
+          "turns_to_recast": 4,
           "modifiable_range": true,
           "line_of_sight": true,
           "linear": false,
@@ -258,27 +217,44 @@
           "can_critical": true,
           "base_effects": [
             {
-              "min": 0,
-              "max": 0,
-              "on": "target",
-              "element": "raw",
-              "type": "heal",
-              "turns": 1,
-              "trigger": "trap",
-              "chance": 0.5
+              "type": "trap_modifier",
+              "modifier": "cancel_damage",
+              "turns": 2,
+              "chance": 100
             },
             {
-              "min": 0,
-              "max": 0,
-              "on": "target",
-              "element": "raw",
-              "type": "add_damage",
-              "turns": 1,
-              "trigger": "trap",
-              "chance": 0.5
+              "type": "trap_modifier",
+              "modifier": "heal",
+              "turns": 2,
+              "chance": 50
+            },
+            {
+              "type": "trap_modifier",
+              "modifier": "add_damage",
+              "turns": 2,
+              "chance": 50
             }
           ],
-          "critical_effects": []
+          "critical_effects": [
+            {
+              "type": "trap_modifier",
+              "modifier": "cancel_damage",
+              "turns": 3,
+              "chance": 100
+            },
+            {
+              "type": "trap_modifier",
+              "modifier": "heal",
+              "turns": 3,
+              "chance": 50
+            },
+            {
+              "type": "trap_modifier",
+              "modifier": "add_damage",
+              "turns": 3,
+              "chance": 50
+            }
+          ]
         }
       ]
     },
@@ -291,7 +267,7 @@
         {
           "cost": 6,
           "range": [2, 4],
-          "critical_chance": [1, 100],
+          "critical_chance": 100,
           "area": 2,
           "area_type": "line",
           "casts_per_turn": 0,
@@ -304,26 +280,40 @@
           "can_critical": true,
           "base_effects": [
             {
+              "type": "damage",
               "min": 6,
               "max": 11,
-              "on": "target",
+              "target": "cell",
               "element": "air",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
+            },
+            {
+              "type": "steal",
+              "min": 1,
+              "max": 4,
+              "target": "cell",
+              "chance": 50,
+              "turns": 1,
+              "statistic": "agility"
             }
           ],
           "critical_effects": [
             {
+              "type": "damage",
               "min": 12,
               "max": 15,
-              "on": "target",
+              "target": "cell",
               "element": "air",
-              "type": "damage",
-              "turns": 0,
-              "trigger": "immediate",
               "chance": 100
+            },
+            {
+              "type": "steal",
+              "min": 5,
+              "max": 5,
+              "target": "cell",
+              "chance": 100,
+              "turns": 1,
+              "statistic": "agility"
             }
           ]
         }

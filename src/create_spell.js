@@ -3,11 +3,9 @@ import { writeFile } from 'fs/promises'
 const DamageEffect = ({
   min = 0, // min value apllied to the target
   max = min, // max value applied to the target
-  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies']
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
   element = 'raw', // element of the spell ['raw', 'earth', 'fire', 'water', 'air']
   chance = 100, // chance of the effect to trigger
-  trigger = 'immediate', // when the effect is triggered ['immediate', 'end_of_turn', 'start_of_turn']
-  turns = 0, // number of turns the effect lasts
 }) => ({
   type: 'damage',
   min,
@@ -15,35 +13,70 @@ const DamageEffect = ({
   target,
   element,
   chance,
-  trigger,
+})
+
+// effect applied at the end of the turn
+const PoisonEffect = ({
+  min = 0, // min value apllied to the target
+  max = min, // max value applied to the target
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
+  chance = 100, // chance of the effect to trigger
+  turns = 0, // number of turns the effect lasts
+  element = 'raw', // element of the spell ['raw', 'earth', 'fire', 'water', 'air']
+}) => ({
+  type: 'poison',
+  min,
+  max,
+  target,
+  element,
+  chance,
   turns,
 })
 
-// similar to damage but an entity must be on the cell area (glyphs, traps)
-const TrapEffect = ({
+// effect applied at the start of the turn
+const CurseEffect = ({
   min = 0, // min value apllied to the target
   max = min, // max value applied to the target
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
+  chance = 100, // chance of the effect to trigger
+  turns = 0, // number of turns the effect lasts
   element = 'raw', // element of the spell ['raw', 'earth', 'fire', 'water', 'air']
-  trigger = 'immediate', // when the effect is triggered ['immediate', 'end_of_turn', 'start_of_turn']
 }) => ({
-  type: 'trap',
+  type: 'curse',
   min,
   max,
+  target,
+  chance,
+  turns,
   element,
-  trigger,
+})
+
+const AddEffect = ({
+  min = 0, // min value apllied to the target
+  max = min, // max value applied to the target
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
+  chance = 100, // chance of the effect to trigger
+  turns = 0, // number of turns the effect lasts
+  statistic = 'damage', // statistic to add ['ap', 'mp', 'range', 'damage', 'critical', 'wisdom', 'strength', 'intelligence', 'chance', 'agility']
+}) => ({
+  type: 'add',
+  min,
+  max,
+  target,
+  chance,
+  turns,
+  statistic,
 })
 
 const TrapModifierEffect = ({
-  heal = false,
-  add_damage = false,
-  cancel_damage = false,
-  turns = 0, // number of turns the effect lasts
+  modifier = 'heal', // modifier to apply ['heal', 'add_damage', 'cancel_damage']
+  turns = 1, // number of turns the effect lasts
+  chance = 100, // chance of the effect to trigger
 }) => ({
   type: 'trap_modifier',
-  heal,
-  add_damage,
-  cancel_damage,
+  modifier,
   turns,
+  chance,
 })
 
 const TeleportEffect = ({
@@ -56,9 +89,8 @@ const TeleportEffect = ({
 const HealEffect = ({
   min = 0, // min value apllied to the target
   max = min, // max value applied to the target
-  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies']
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
   chance = 100, // chance of the effect to trigger
-  trigger = 'immediate', // when the effect is triggered ['immediate', 'end_of_turn', 'start_of_turn']
   turns = 0, // number of turns the effect lasts
 }) => ({
   type: 'heal',
@@ -66,16 +98,14 @@ const HealEffect = ({
   max,
   target,
   chance,
-  trigger,
   turns,
 })
 
 const StealEffect = ({
   min = 0, // min value apllied to the target
   max = min, // max value applied to the target
-  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies']
+  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies', 'trap']
   chance = 100, // chance of the effect to trigger
-  trigger = 'immediate', // when the effect is triggered ['immediate', 'end_of_turn', 'start_of_turn']
   turns = 0, // number of turns the effect lasts
   statistic = 'health', // statistic to steal ['health', 'ap', 'mp', 'range', 'damage', 'wisdom', 'strength', 'intelligence', 'chance', 'agility']
 }) => ({
@@ -84,7 +114,6 @@ const StealEffect = ({
   max,
   target,
   chance,
-  trigger,
   turns,
   statistic,
 })
@@ -98,29 +127,10 @@ const PushEffect = ({
   chance,
 })
 
-const AddEffect = ({
-  min = 0, // min value apllied to the target
-  max = min, // max value applied to the target
-  target = 'cell', // target of the spell ['cell', 'self', 'allies', 'enemies']
-  chance = 100, // chance of the effect to trigger
-  trigger = 'immediate', // when the effect is triggered ['immediate', 'end_of_turn', 'start_of_turn']
-  turns = 0, // number of turns the effect lasts
-  statistic = 'damage', // statistic to add ['ap', 'mp', 'range', 'damage', 'critical', 'wisdom', 'strength', 'intelligence', 'chance', 'agility']
-}) => ({
-  type: 'add',
-  min,
-  max,
-  target,
-  chance,
-  trigger,
-  turns,
-  statistic,
-})
-
 const Level = ({
   cost = 1,
   range = [0, 0],
-  critical_chance = [1, 100],
+  critical_chance = 100,
   area = 1,
   area_type = 'square',
   casts_per_turn = 0,
@@ -177,14 +187,20 @@ const iop = {
         range: [1, 2],
         modifiable_range: false,
         base_effects: [DamageEffect({ min: 5, max: 10, element: 'earth' })],
-        critical_effects: [DamageEffect({ min: 7, max: 12, element: 'earth' })],
+        critical_effects: [
+          DamageEffect({ min: 7, max: 12, element: 'earth' }),
+          PushEffect({ distance: 1, chance: 30 }),
+        ],
       }),
       Level({
         cost: 4,
         range: [1, 2],
         modifiable_range: false,
         base_effects: [DamageEffect({ min: 6, max: 13, element: 'earth' })],
-        critical_effects: [DamageEffect({ min: 7, max: 15, element: 'earth' })],
+        critical_effects: [
+          DamageEffect({ min: 7, max: 15, element: 'earth' }),
+          PushEffect({ distance: 1, chance: 30 }),
+        ],
       }),
     ],
   }),
@@ -199,6 +215,7 @@ const iop = {
         range: [1, 4],
         modifiable_range: false,
         free_cell: true,
+        can_critical: false,
         base_effects: [TeleportEffect({})],
       }),
     ],
@@ -213,7 +230,7 @@ const iop = {
       Level({
         cost: 2,
         range: [0, 0],
-        critical_chance: [1, 40],
+        critical_chance: 40,
         turns_to_recast: 4,
         area: 2,
         area_type: 'circle',
@@ -240,7 +257,22 @@ const sram = {
         range: [1, 4],
         free_cell: true,
         can_critical: false,
-        base_effects: [DamageEffect({ min: 5, max: 9, element: 'earth' })],
+        base_effects: [
+          DamageEffect({
+            min: 5,
+            max: 9,
+            element: 'earth',
+            target: 'trap',
+          }),
+          PoisonEffect({
+            min: 1,
+            max: 3,
+            turns: 2,
+            element: 'air',
+            target: 'trap',
+            chance: 10,
+          }),
+        ],
       }),
     ],
   }),
@@ -253,14 +285,23 @@ const sram = {
       Level({
         cost: 2,
         free_cell: true,
-        turns_to_recast: 2,
+        turns_to_recast: 4,
         base_effects: [
-          Effect({ trigger: 'trap', turns: 1, type: 'heal', chance: 0.5 }),
-          Effect({
-            trigger: 'trap',
-            turns: 1,
-            type: 'add_damage',
-            chance: 0.5,
+          TrapModifierEffect({ modifier: 'cancel_damage', turns: 2 }),
+          TrapModifierEffect({ modifier: 'heal', chance: 50, turns: 2 }),
+          TrapModifierEffect({
+            modifier: 'add_damage',
+            chance: 50,
+            turns: 2,
+          }),
+        ],
+        critical_effects: [
+          TrapModifierEffect({ modifier: 'cancel_damage', turns: 3 }),
+          TrapModifierEffect({ modifier: 'heal', chance: 50, turns: 3 }),
+          TrapModifierEffect({
+            modifier: 'add_damage',
+            chance: 50,
+            turns: 3,
           }),
         ],
       }),
@@ -278,8 +319,25 @@ const sram = {
         area: 2,
         area_type: 'line',
         linear: true,
-        base_effects: [Effect({ min: 6, max: 11, element: 'air' })],
-        critical_effects: [Effect({ min: 12, max: 15, element: 'air' })],
+        base_effects: [
+          DamageEffect({ min: 6, max: 11, element: 'air' }),
+          StealEffect({
+            min: 1,
+            max: 4,
+            turns: 1,
+            statistic: 'agility',
+            chance: 50,
+          }),
+        ],
+        critical_effects: [
+          DamageEffect({ min: 12, max: 15, element: 'air' }),
+          StealEffect({
+            min: 5,
+            max: 5,
+            turns: 1,
+            statistic: 'agility',
+          }),
+        ],
       }),
     ],
   }),

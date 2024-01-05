@@ -15,4 +15,4 @@
 
 Install the vscode extension D2 and then open the preview
 
-![]([image.png](https://i.imgur.com/aqQlPx1.png))
+![](<[image.png](https://i.imgur.com/aqQlPx1.png)>)

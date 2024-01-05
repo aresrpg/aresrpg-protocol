@@ -53,6 +53,8 @@ message EntitySpawn {
   string name = 2;
   Position position = 3;
   EntityType type = 4;
+  optional Classe classe = 5;
+  optional bool female = 6;
 }
 
 message EntityDespawn {
@@ -74,6 +76,8 @@ message ServerInfo {
 // request to create a new character, the server will respond with a ListCharactersResponse
 message CreateCharacter {
   string name = 1;
+  Classe classe = 2;
+  bool female = 3;
 }
 
 // request to load characters list, the server will respond with a ListCharactersResponse
@@ -120,12 +124,19 @@ message Character {
   uint32 level = 3;
   uint32 head = 4;
   uint32 cape = 5;
+  Classe classe = 6;
+  bool female = 7;
 }
 
 enum EntityType {
   PLAYER = 0;
   CREATURE = 1;
   NPC = 2;
+}
+
+enum Classe {
+  IOP = 0;
+  SRAM = 1;
 }
 
 enum ErrorCode {
