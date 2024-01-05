@@ -215,6 +215,7 @@ const iop = {
         range: [1, 4],
         modifiable_range: false,
         free_cell: true,
+        line_of_sight: false,
         can_critical: false,
         base_effects: [TeleportEffect({})],
       }),
@@ -257,6 +258,7 @@ const sram = {
         range: [1, 4],
         free_cell: true,
         can_critical: false,
+        line_of_sight: false,
         base_effects: [
           DamageEffect({
             min: 5,
@@ -284,7 +286,6 @@ const sram = {
     levels: [
       Level({
         cost: 2,
-        free_cell: true,
         turns_to_recast: 4,
         base_effects: [
           TrapModifierEffect({ modifier: 'cancel_damage', turns: 2 }),
