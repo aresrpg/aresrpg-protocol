@@ -3,32 +3,26 @@ package ares;
 
 message Packet {
   oneof type {
-    WorldSeed worldSeed = 1;
-    ListCharactersResponse listCharactersResponse = 2;
-    ConnectionSuccess connectionSuccess = 3;
-    CreateCharacter createCharacter = 4;
-    ListCharacters listCharacters = 5;
-    SelectCharacter selectCharacter = 6;
-    PlayerPosition playerPosition = 7;
-    EntityMove entityMove = 8;
-    LeaveGame leaveGame = 9;
-    JoinGame joinGame = 10;
-    JoinGameReady joinGameReady = 11;
-    EntitySpawn entitySpawn = 12;
-    EntityDespawn entityDespawn = 13;
-    Error error = 14;
-    EntityAction entityAction = 15;
-    ServerInfo serverInfo = 16;
+    ListCharactersResponse listCharactersResponse = 1;
+    ConnectionSuccess connectionSuccess = 2;
+    CreateCharacter createCharacter = 3;
+    ListCharacters listCharacters = 4;
+    SelectCharacter selectCharacter = 5;
+    PlayerPosition playerPosition = 6;
+    EntityMove entityMove = 7;
+    LeaveGame leaveGame = 8;
+    JoinGame joinGame = 9;
+    JoinGameReady joinGameReady = 10;
+    EntitySpawn entitySpawn = 11;
+    EntityDespawn entityDespawn = 12;
+    Error error = 13;
+    EntityAction entityAction = 14;
+    ServerInfo serverInfo = 15;
   }
 }
 
 // ======================================== [SERVER -> CLIENT]
 // Packets sent from the server to the client
-
-// change the seed for the world
-message WorldSeed {
-  string seed = 1;
-}
 
 // return the player's characters list
 message ListCharactersResponse {

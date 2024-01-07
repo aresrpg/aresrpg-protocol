@@ -5,7 +5,6 @@ client.shape: person
 cluster.style.multiple: true
 
 client.t -> server.t: ( packet/joinGameReady )
-server.t -> client.t: ( packet/worldSeed )
 server.t -> cluster.t: |md Subscribe
 - chunk: { x, z }
 - chunk around

@@ -6,6 +6,7 @@ export {
   to_chunk_position,
   CHUNK_SIZE,
   WORLD_HEIGHT,
+  MAP_BOUNDS,
   spiral_array,
   square_array,
 } from './chunk.js'
