@@ -344,6 +344,10 @@ const sram = {
   }),
 }
 
+// ts lint
+CurseEffect()
+HealEffect()
+
 await writeFile(
   './src/spells.json',
   JSON.stringify({

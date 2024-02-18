@@ -43,16 +43,11 @@ message JoinGame {
 }
 
 message EntitySpawn {
-  string id = 1;
-  string name = 2;
-  Position position = 3;
-  EntityType type = 4;
-  optional Classe classe = 5;
-  optional bool female = 6;
+  repeated Entity entities = 1;
 }
 
 message EntityDespawn {
-  string id = 1;
+  repeated string ids = 1;
 }
 
 message Error {
@@ -112,6 +107,11 @@ message Position {
   float z = 3;
 }
 
+message SiblingEntity {
+  string name = 1;
+  uint32 level = 2;
+}
+
 message Character {
   string id = 1;
   string name = 2;
@@ -122,9 +122,20 @@ message Character {
   bool female = 7;
 }
 
+message Entity {
+  string id = 1;
+  string name = 2;
+  Position position = 3;
+  EntityType type = 4;
+  uint32 level = 5;
+  optional Classe classe = 6;
+  optional bool female = 7;
+  repeated SiblingEntity siblings = 8;
+}
+
 enum EntityType {
   PLAYER = 0;
-  CREATURE = 1;
+  MOB = 1;
   NPC = 2;
 }
 

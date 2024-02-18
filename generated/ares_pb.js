@@ -12,7 +12,7 @@ export const EntityType = proto3.makeEnum(
   "ares.EntityType",
   [
     {no: 0, name: "PLAYER"},
-    {no: 1, name: "CREATURE"},
+    {no: 1, name: "MOB"},
     {no: 2, name: "NPC"},
   ],
 );
@@ -125,12 +125,7 @@ export const JoinGame = proto3.makeMessageType(
 export const EntitySpawn = proto3.makeMessageType(
   "ares.EntitySpawn",
   () => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "position", kind: "message", T: Position },
-    { no: 4, name: "type", kind: "enum", T: proto3.getEnumType(EntityType) },
-    { no: 5, name: "classe", kind: "enum", T: proto3.getEnumType(Classe), opt: true },
-    { no: 6, name: "female", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 1, name: "entities", kind: "message", T: Entity, repeated: true },
   ],
 );
 
@@ -140,7 +135,7 @@ export const EntitySpawn = proto3.makeMessageType(
 export const EntityDespawn = proto3.makeMessageType(
   "ares.EntityDespawn",
   () => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -257,6 +252,17 @@ export const Position = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message ares.SiblingEntity
+ */
+export const SiblingEntity = proto3.makeMessageType(
+  "ares.SiblingEntity",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "level", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+  ],
+);
+
+/**
  * @generated from message ares.Character
  */
 export const Character = proto3.makeMessageType(
@@ -269,6 +275,23 @@ export const Character = proto3.makeMessageType(
     { no: 5, name: "cape", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 6, name: "classe", kind: "enum", T: proto3.getEnumType(Classe) },
     { no: 7, name: "female", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message ares.Entity
+ */
+export const Entity = proto3.makeMessageType(
+  "ares.Entity",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "position", kind: "message", T: Position },
+    { no: 4, name: "type", kind: "enum", T: proto3.getEnumType(EntityType) },
+    { no: 5, name: "level", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: "classe", kind: "enum", T: proto3.getEnumType(Classe), opt: true },
+    { no: 7, name: "female", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 8, name: "siblings", kind: "message", T: SiblingEntity, repeated: true },
   ],
 );
 

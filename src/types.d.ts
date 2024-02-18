@@ -112,15 +112,19 @@ export type Packets = {
   'packet/joinGame': object
   'packet/joinGameReady': object
   'packet/entitySpawn': {
-    id: string
-    type: string
-    position: Position
-    name: string
-    classe?: string
-    female?: boolean
+    entities: {
+      id: string
+      type: string
+      position: Position
+      name: string
+      classe?: string
+      female?: boolean
+      level: number
+      siblings: { name: string; level: number }[]
+    }[]
   }
   'packet/entityMove': { id: string; type: string; position: Position }
-  'packet/entityDespawn': { id: string }
+  'packet/entityDespawn': { ids: string[] }
   'packet/entityAction': { id: string; action: string }
   'packet/serverInfo': { online: number; max: number }
 }

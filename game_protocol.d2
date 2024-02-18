@@ -60,3 +60,13 @@ The chunk is tracked: {
   cluster.t7 -> server.t7: |md broadcast/entityAction |
   server.t7 -> client.t7: ( packet/entityAction )
 }
+
+
+- enters chunk
+- fetch mobs in chunk
+  - if limit not reached, decide to spawn or not
+    - if spawn
+      - spawn mobs and add to redis chunk
+    - if not, do nothing
+- when player take mobs
+  - update mob in redis, confirm if another player didn't take first
