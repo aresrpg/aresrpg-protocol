@@ -1,6 +1,6 @@
 {
   "name": "@aresrpg/aresrpg-protocol",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "main": "src/index.js",
   "type": "module",
   "typings": "types/src/index.d.ts",
