@@ -9,7 +9,7 @@
     "lint": "eslint . && prettier . --check && npm run typecheck",
     "typecheck": "tsc --build",
     "format": "prettier . --write && eslint . --fix",
-    "postversion": "git push --follow-tags && npm publish"
+    "postversion": "git push --follow-tags"
   },
   "dependencies": {
     "@bufbuild/buf": "^1.28.1",
