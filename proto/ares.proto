@@ -3,43 +3,25 @@ package ares;
 
 message Packet {
   oneof type {
-    ListCharactersResponse listCharactersResponse = 1;
-    ConnectionSuccess connectionSuccess = 2;
-    CreateCharacter createCharacter = 3;
-    ListCharacters listCharacters = 4;
-    SelectCharacter selectCharacter = 5;
-    PlayerPosition playerPosition = 6;
-    EntityMove entityMove = 7;
-    LeaveGame leaveGame = 8;
-    JoinGame joinGame = 9;
-    JoinGameReady joinGameReady = 10;
-    EntitySpawn entitySpawn = 11;
-    EntityDespawn entityDespawn = 12;
-    Error error = 13;
-    EntityAction entityAction = 14;
-    ServerInfo serverInfo = 15;
+    SignatureRequest signatureRequest = 1;
+    Error error = 2;
+    SignatureResponse signatureResponse = 3;
+    EntityMove entityMove = 4;
+    EntitySpawn entitySpawn = 5;
+    EntityAction entityAction = 6;
+    EntityDespawn entityDespawn = 7;
   }
 }
 
 // ======================================== [SERVER -> CLIENT]
 // Packets sent from the server to the client
 
-// return the player's characters list
-message ListCharactersResponse {
-  repeated Character characters = 1;
-  uint32 limit = 2;
+message SignatureRequest {
+  string payload = 1;
 }
 
-// notify the client that the connection was successful
-message ConnectionSuccess {
-}
-
-message EntityMove {
-  string id = 1;
-  Position position = 2;
-}
-
-message JoinGame {
+message Error {
+  ErrorCode code = 1;
 }
 
 message EntitySpawn {
@@ -50,56 +32,33 @@ message EntityDespawn {
   repeated string ids = 1;
 }
 
-message Error {
-  ErrorCode code = 1;
-}
-
-message ServerInfo {
-  uint32 online = 1;
-  uint32 max = 2;
-}
-
 // ======================================== [CLIENT -> SERVER]
 // Packets sent from the client to the server
 
-// request to create a new character, the server will respond with a ListCharactersResponse
-message CreateCharacter {
-  string name = 1;
-  Classe classe = 2;
-  bool female = 3;
+message SignatureResponse {
+  string bytes = 1;
+  string signature = 2;
 }
-
-// request to load characters list, the server will respond with a ListCharactersResponse
-message ListCharacters {
-}
-
-// request to select a character, the server will start sending ChunkLoad packets
-message SelectCharacter {
-  string id = 1;
-}
-
-message JoinGameReady {}
-
-// the client is going back to the main menu
-message LeaveGame {}
 
 // ======================================== [CLIENT <-> SERVER]
 // Packets used by both client and server
-
-// notify the other party that the player moved
-// when the server receives it he stores the position
-// when the client receives it he updates the position
-message PlayerPosition {
-  Position position = 1;
-}
 
 message EntityAction {
   string id = 1;
   Action action = 2;
 }
 
+message EntityMove {
+  repeated EntityPosition entities = 1;
+}
+
 // ========================================
-// Types used by both client and server
+// Types used by packets
+
+message EntityPosition {
+  string id = 1;
+  Position position = 2;
+}
 
 message Position {
   float x = 1;
@@ -112,31 +71,18 @@ message SiblingEntity {
   uint32 level = 2;
 }
 
-message Character {
-  string id = 1;
-  string name = 2;
-  uint32 level = 3;
-  uint32 head = 4;
-  uint32 cape = 5;
-  Classe classe = 6;
-  bool female = 7;
-}
-
 message Entity {
   string id = 1;
   string name = 2;
   Position position = 3;
   EntityType type = 4;
   uint32 level = 5;
-  optional Classe classe = 6;
-  optional bool female = 7;
   repeated SiblingEntity siblings = 8;
 }
 
 enum EntityType {
-  PLAYER = 0;
-  MOB = 1;
-  NPC = 2;
+  MOB = 0;
+  NPC = 1;
 }
 
 enum Classe {
@@ -145,8 +91,7 @@ enum Classe {
 }
 
 enum ErrorCode {
-  CREATE_CHARACTER_NAME_TAKEN = 0;
-  NO_BETA_ACCESS = 1;
+  NO_BETA_ACCESS = 0;
 }
 
 enum Action {

@@ -1,72 +1,73 @@
 shape: sequence_diagram
-client; server; cluster
+client; server; cluster; sui;
 
 client.shape: person
 cluster.style.multiple: true
+sui.shape: image;
+sui.icon: https://cryptologos.cc/logos/sui-sui-logo.png;
 
-client.t -> server.t: ( packet/joinGameReady )
-server.t -> cluster.t: |md Subscribe
-- chunk: { x, z }
-- chunk around
-|
-server.t -> client.t: ( packet/playerPosition )
-server.t -> cluster.t: |md broadcast/entitySpawn
-- chunk: { x, z }
-|
+client."Characters"
 
-client."Client joined the game"
-
-Player is leaving: {
-  client.t0 -> server.t0: ( packet/leaveGame )
-  server.t0 -> cluster.t0: |md Unsubscribe
-  - chunk: { x, z }
-  - chunk around
+Playing with characters: {
+  client -> server.a0: |md .
+    packet/playerPosition
+    - { id, x, y, z }
+    enough to "select" the character |
+  client -> server.a0: |md packet/entityAction
+    - { id, action } |
+  server.a0 <-> sui.a0: |md (if unkown)
+  fetch character |
+  server.a0 -> client: |md (if wrong)
+  reconcile position
+  packet/playerPosition |
+  server.a0 -> cluster: |md Subscribe
+  - zone { x, z }
+  - zones around
   |
-  server.t0 -> cluster.t0: |md broadcast/entityDespawn |
-  server.t0 -> server.t0: selected_character = null
+  server."Publish topic is floor(coords / 500)"
+  server.a0 -> cluster: |md publish/entityMove
+  - { id, x, y, z } |
+  server.a0 -> cluster: |md publish/entityAction
+  - { id, x, y, z } |
 }
 
-Player is moving: {
-  client.t2 -> server.t2: ( packet/playerPosition )
-  server.t2 -> cluster.t2: |md update tracking
-  - chunk: { x, z }
-  - chunk around
+Listening to other characters: {
+  cluster.a1 -> server.a1: |md publish/entityMove
+  - zone { x, z } |
+  cluster.a1 -> server.a1: |md publish/entityAction
+  - zone { x, z } |
+  server.a1 -> client.a1: packet/entityMove
+  server.a1 -> client.a1: packet/entityAction
+  client.a1 <-> client.a1: |md (if unknown)
+  spawn entity
   |
-  server.t2 -> cluster.t2: |md broadcast/entityEnterChunk
-  (if just moved in)
-  |
-  server.t2 -> cluster.t2: |md broadcast/entityMove
-  - chunk: { x, z }
-  |
-
-  client.t3 -> server.t3: ( packet/entityAction )
-  server.t3 -> cluster.t3: |md broadcast/entityAction |
 }
 
-server."Server entities and players"
+client."Character despawning"
 
-The chunk is tracked: {
-  cluster.t4 -> server.t4: |md broadcast/entityEnterChunk |
-  server.t4 -> client.t4: |md packet/entitySpawn
-  (if unknown) |
-  cluster.t5 -> server.t5: |md broadcast/entityMove |
-  server.t5 -> client.t5: ( packet/entityMove )
-  server.t5 -> client.t5: |md packet/entityDespawn
-( if just moved away )
+Player closing socket: {
+  client -> server.a2: close socket
+  server.a2 -> cluster: publish/entityDespawn
+  server.a2 -> cluster: |md Unsubscribe
+  - zone { x, z }
+  - zones around
   |
-  cluster.t6 -> server.t6: |md broadcast/entityDespawn |
-  server.t6 -> client.t6: ( packet/entityDespawn )
-
-  cluster.t7 -> server.t7: |md broadcast/entityAction |
-  server.t7 -> client.t7: ( packet/entityAction )
 }
 
+Player changing zone: {
+  client -> server.a3: |md packet/playerPosition
+  { id, x, y, z } |
+  server.a3 -> cluster.a3: |md
+  - Unsubscribe zones too far
+  - Subscribe new zones
+  |
+  server.a3 -> cluster.a3: |md publish/entityMove
+  - previous zone
+  |
+  server.a3 -> cluster.a3: |md publish/entityMove
+  zone { x, z }
+  |
+}
 
-- enters chunk
-- fetch mobs in chunk
-  - if limit not reached, decide to spawn or not
-    - if spawn
-      - spawn mobs and add to redis chunk
-    - if not, do nothing
-- when player take mobs
-  - update mob in redis, confirm if another player didn't take first
+cluster.a4 -> server.a4: publish/entityDespawn
+server.a4 -> client.a4: packet/entityDespawn

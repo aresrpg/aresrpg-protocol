@@ -1,0 +1,25 @@
+shape: sequence_diagram
+client; server
+
+client.shape: person
+server.style.multiple: true
+
+client.Offline
+
+Connection flow: {
+  client.t -> server.t: ws connect
+  server.t -> client: packet/signatureRequest
+  client.t -> server.t: packet/signatureResponse
+  server.t -> server.t: verify signature
+  server.t -> client: (failure) kill connection
+}
+
+client."Connection success"
+
+Network broadcast: {
+  server.t1 -> server.t1: publish/addressConnected
+  server.t1 -> client.t1: |md if locally known
+  - disconnect
+  (uppon receiving from other server)
+  |
+}

@@ -80,6 +80,7 @@ interface create_client {
   end: (message: string) => void
   on_end: (cb) => void
   notify_message: (message: ArrayBuffer) => void
+  notify_end: (message: string) => void
 }
 
 type Position = {
@@ -88,45 +89,29 @@ type Position = {
   z: number
 }
 
-export type Character = {
+type SiblingEntity = {
+  name: string
+  level: number
+}
+
+type Entity = {
   id: string
   name: string
   position: Position
+  type: string
   level: number
-  head: number
-  cape: number
-  classe: string
-  female: boolean
+  siblings: SiblingEntity[]
 }
 
 export type Packets = {
   packet: { type: string; payload: any }
-  'packet/listCharacters': object
-  'packet/createCharacter': { name: string; classe: number; female: boolean }
-  'packet/selectCharacter': { id: string }
-  'packet/listCharactersResponse': { characters: Character[]; limit: number }
-  'packet/error': { code: string }
-  'packet/connectionSuccess': object
-  'packet/playerPosition': { position: Position }
-  'packet/leaveGame': object
-  'packet/joinGame': object
-  'packet/joinGameReady': object
-  'packet/entitySpawn': {
-    entities: {
-      id: string
-      type: string
-      position: Position
-      name: string
-      classe?: string
-      female?: boolean
-      level: number
-      siblings: { name: string; level: number }[]
-    }[]
-  }
-  'packet/entityMove': { id: string; type: string; position: Position }
-  'packet/entityDespawn': { ids: string[] }
-  'packet/entityAction': { id: string; action: string }
-  'packet/serverInfo': { online: number; max: number }
+  'packet/signatureRequest': { payload: string } // server -> client
+  'packet/signatureResponse': { bytes: string; signature: string } // client -> server
+  'packet/error': { code: string } // server -> client
+  'packet/entitySpawn': { entities: Entity[] } // server -> client
+  'packet/entityDespawn': { ids: string[] } // server -> client
+  'packet/entityMove': { entities: { id: string; position: Position }[] } // both ways
+  'packet/entityAction': { id: string; action: string } // both ways
 }
 
 type Packet = {
