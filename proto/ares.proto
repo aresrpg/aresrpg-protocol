@@ -6,9 +6,9 @@ message Packet {
     SignatureRequest signatureRequest = 1;
     Error error = 2;
     SignatureResponse signatureResponse = 3;
-    EntityMove entityMove = 4;
-    EntitySpawn entitySpawn = 5;
-    EntityAction entityAction = 6;
+    CharacterAction characterAction = 4;
+    CharacterPosition characterPosition = 5;
+    EntitySpawn entitySpawn = 6;
     EntityDespawn entityDespawn = 7;
   }
 }
@@ -43,22 +43,18 @@ message SignatureResponse {
 // ======================================== [CLIENT <-> SERVER]
 // Packets used by both client and server
 
-message EntityAction {
+message CharacterAction {
   string id = 1;
   Action action = 2;
 }
 
-message EntityMove {
-  repeated EntityPosition entities = 1;
+message CharacterPosition {
+  string id = 1;
+  Position position = 2;
 }
 
 // ========================================
 // Types used by packets
-
-message EntityPosition {
-  string id = 1;
-  Position position = 2;
-}
 
 message Position {
   float x = 1;

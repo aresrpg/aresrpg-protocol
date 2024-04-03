@@ -110,8 +110,8 @@ export type Packets = {
   'packet/error': { code: string } // server -> client
   'packet/entitySpawn': { entities: Entity[] } // server -> client
   'packet/entityDespawn': { ids: string[] } // server -> client
-  'packet/entityMove': { entities: { id: string; position: Position }[] } // both ways
-  'packet/entityAction': { id: string; action: string } // both ways
+  'packet/characterAction': { id: string; action: string } // both ways
+  'packet/characterMove': { id: string; position: Position } // both ways
 }
 
 type Packet = {

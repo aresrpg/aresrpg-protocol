@@ -58,19 +58,25 @@ export const Packet = proto3.makeMessageType('ares.Packet', () => [
     T: SignatureResponse,
     oneof: 'type',
   },
-  { no: 4, name: 'entityMove', kind: 'message', T: EntityMove, oneof: 'type' },
+  {
+    no: 4,
+    name: 'characterAction',
+    kind: 'message',
+    T: CharacterAction,
+    oneof: 'type',
+  },
   {
     no: 5,
-    name: 'entitySpawn',
+    name: 'characterPosition',
     kind: 'message',
-    T: EntitySpawn,
+    T: CharacterPosition,
     oneof: 'type',
   },
   {
     no: 6,
-    name: 'entityAction',
+    name: 'entitySpawn',
     kind: 'message',
-    T: EntityAction,
+    T: EntitySpawn,
     oneof: 'type',
   },
   {
@@ -134,31 +140,21 @@ export const SignatureResponse = proto3.makeMessageType(
 )
 
 /**
- * @generated from message ares.EntityAction
+ * @generated from message ares.CharacterAction
  */
-export const EntityAction = proto3.makeMessageType('ares.EntityAction', () => [
-  { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-  { no: 2, name: 'action', kind: 'enum', T: proto3.getEnumType(Action) },
-])
+export const CharacterAction = proto3.makeMessageType(
+  'ares.CharacterAction',
+  () => [
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'action', kind: 'enum', T: proto3.getEnumType(Action) },
+  ],
+)
 
 /**
- * @generated from message ares.EntityMove
+ * @generated from message ares.CharacterPosition
  */
-export const EntityMove = proto3.makeMessageType('ares.EntityMove', () => [
-  {
-    no: 1,
-    name: 'entities',
-    kind: 'message',
-    T: EntityPosition,
-    repeated: true,
-  },
-])
-
-/**
- * @generated from message ares.EntityPosition
- */
-export const EntityPosition = proto3.makeMessageType(
-  'ares.EntityPosition',
+export const CharacterPosition = proto3.makeMessageType(
+  'ares.CharacterPosition',
   () => [
     { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'position', kind: 'message', T: Position },
