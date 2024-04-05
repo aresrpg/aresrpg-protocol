@@ -36,7 +36,6 @@ message EntityDespawn {
 message ServerInfo {
   uint32 player_count = 1;
   uint32 max_players = 2;
-  uint32 character_count = 3;
 }
 
 // ======================================== [CLIENT -> SERVER]

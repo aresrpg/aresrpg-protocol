@@ -113,7 +113,6 @@ export type Packets = {
   'packet/serverInfo': {
     player_count: number
     max_players: number
-    character_count: number
   } // server -> client
 }
 

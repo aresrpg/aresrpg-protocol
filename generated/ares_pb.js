@@ -140,12 +140,6 @@ export const ServerInfo = proto3.makeMessageType('ares.ServerInfo', () => [
     T: 13 /* ScalarType.UINT32 */,
   },
   { no: 2, name: 'max_players', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-  {
-    no: 3,
-    name: 'character_count',
-    kind: 'scalar',
-    T: 13 /* ScalarType.UINT32 */,
-  },
 ])
 
 /**
