@@ -110,7 +110,11 @@ export type Packets = {
   'packet/entityDespawn': { ids: string[] } // server -> client
   'packet/characterAction': { id: string; action: string } // both ways
   'packet/characterPosition': { id: string; position: Position } // both ways
-  'packet/serverInfo': { player_count: number }
+  'packet/serverInfo': {
+    player_count: number
+    max_players: number
+    character_count: number
+  } // server -> client
 }
 
 type Packet = {
