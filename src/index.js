@@ -4,7 +4,6 @@ import * as Packets from '../generated/ares_pb.js'
 
 export * from './chunk.js'
 
-/** @type {typeof import("./types").create_client} */
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
   const stream = new PassThrough({

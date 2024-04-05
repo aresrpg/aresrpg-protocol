@@ -10,6 +10,7 @@ message Packet {
     CharacterPosition characterPosition = 5;
     EntitySpawn entitySpawn = 6;
     EntityDespawn entityDespawn = 7;
+    ServerInfo serverInfo = 8;
   }
 }
 
@@ -30,6 +31,10 @@ message EntitySpawn {
 
 message EntityDespawn {
   repeated string ids = 1;
+}
+
+message ServerInfo {
+  uint32 player_count = 1;
 }
 
 // ======================================== [CLIENT -> SERVER]

@@ -71,8 +71,6 @@ export module 'events' {
   }
 }
 
-export function create_client({ socket_write, socket_end }): create_client
-
 interface create_client {
   controller: AbortController
   stream: NodeJS.ReadWriteStream
@@ -111,7 +109,8 @@ export type Packets = {
   'packet/entitySpawn': { entities: Entity[] } // server -> client
   'packet/entityDespawn': { ids: string[] } // server -> client
   'packet/characterAction': { id: string; action: string } // both ways
-  'packet/characterMove': { id: string; position: Position } // both ways
+  'packet/characterPosition': { id: string; position: Position } // both ways
+  'packet/serverInfo': { player_count: number }
 }
 
 type Packet = {
