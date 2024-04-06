@@ -114,7 +114,7 @@ export type Packets = {
     player_count: number
     max_players: number
   } // server -> client
-  'packet/chatMessage': { id: string; message: string } // both ways
+  'packet/chatMessage': { id: string; message: string; address: string } // both ways
 }
 
 type Packet = {

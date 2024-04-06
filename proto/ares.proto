@@ -63,6 +63,7 @@ message CharacterPosition {
 message ChatMessage {
   string id = 1;
   string message = 2;
+  string address = 3;
 }
 
 // ========================================
