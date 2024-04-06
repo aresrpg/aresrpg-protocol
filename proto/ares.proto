@@ -11,6 +11,7 @@ message Packet {
     EntitySpawn entitySpawn = 6;
     EntityDespawn entityDespawn = 7;
     ServerInfo serverInfo = 8;
+    ChatMessage chatMessage = 9;
   }
 }
 
@@ -57,6 +58,11 @@ message CharacterAction {
 message CharacterPosition {
   string id = 1;
   Position position = 2;
+}
+
+message ChatMessage {
+  string id = 1;
+  string message = 2;
 }
 
 // ========================================

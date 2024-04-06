@@ -87,6 +87,13 @@ export const Packet = proto3.makeMessageType('ares.Packet', () => [
     oneof: 'type',
   },
   { no: 8, name: 'serverInfo', kind: 'message', T: ServerInfo, oneof: 'type' },
+  {
+    no: 9,
+    name: 'chatMessage',
+    kind: 'message',
+    T: ChatMessage,
+    oneof: 'type',
+  },
 ])
 
 /**
@@ -174,6 +181,14 @@ export const CharacterPosition = proto3.makeMessageType(
     { no: 2, name: 'position', kind: 'message', T: Position },
   ],
 )
+
+/**
+ * @generated from message ares.ChatMessage
+ */
+export const ChatMessage = proto3.makeMessageType('ares.ChatMessage', () => [
+  { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+  { no: 2, name: 'message', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+])
 
 /**
  * @generated from message ares.Position
