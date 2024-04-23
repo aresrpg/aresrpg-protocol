@@ -4,8 +4,6 @@ import * as Packets from '../generated/ares_pb.js'
 
 export * from './chunk.js'
 
-/** @typedef {import("./types").Packets} Packets */
-
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
   const stream = new PassThrough({
@@ -18,7 +16,7 @@ export function create_client({ socket_write, socket_end }) {
   return {
     controller,
     stream,
-    /** @type {<T extends keyof Packets>(type: T, payload: Packets[T]) => void} */
+    /** @type {import("./types").send} */
     send(raw_type, data) {
       const type = raw_type.slice(7)
       try {

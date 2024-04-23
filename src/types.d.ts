@@ -91,7 +91,7 @@ type Entity = {
   siblings: SiblingEntity[]
 }
 
-export type Packets = {
+type Packets = {
   packet: { type: string; payload: any }
   'packet/signatureRequest': { payload: string } // server -> client
   'packet/signatureResponse': { bytes: string; signature: string } // client -> server
@@ -110,3 +110,8 @@ export type Packets = {
 type Packet = {
   [K in keyof Packets]: { type: K; payload: Packets[K] }
 }[keyof Packets]
+
+export type send = <T extends keyof Packets>(
+  type: T,
+  payload: Packets[T],
+) => void
