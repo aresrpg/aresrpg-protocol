@@ -71,16 +71,6 @@ export module 'events' {
   }
 }
 
-interface create_client {
-  controller: AbortController
-  stream: NodeJS.ReadWriteStream
-  send: <T extends keyof Packets>(type: T, payload: Packets[T]) => void
-  end: (message: string) => void
-  on_end: (cb) => void
-  notify_message: (message: ArrayBuffer) => void
-  notify_end: (message: string) => void
-}
-
 type Position = {
   x: number
   y: number
