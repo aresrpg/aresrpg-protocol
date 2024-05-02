@@ -2,8 +2,6 @@ import { PassThrough } from 'stream'
 
 import * as Packets from '../generated/ares_pb.js'
 
-export * from './chunk.js'
-
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
   const stream = new PassThrough({
