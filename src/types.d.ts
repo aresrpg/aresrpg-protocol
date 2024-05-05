@@ -105,6 +105,7 @@ type Packets = {
     max_players: number
   } // server -> client
   'packet/chatMessage': { id: string; message: string; address: string } // both ways
+  'packet/characterHealth': { id: string; health: number } // server -> client
 }
 
 type Packet = {

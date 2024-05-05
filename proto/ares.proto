@@ -12,6 +12,7 @@ message Packet {
     EntityDespawn entityDespawn = 7;
     ServerInfo serverInfo = 8;
     ChatMessage chatMessage = 9;
+    CharacterHealth characterHealth = 10;
   }
 }
 
@@ -37,6 +38,11 @@ message EntityDespawn {
 message ServerInfo {
   uint32 player_count = 1;
   uint32 max_players = 2;
+}
+
+message CharacterHealth {
+  string id = 1;
+  uint32 health = 2;
 }
 
 // ======================================== [CLIENT -> SERVER]
@@ -104,9 +110,16 @@ enum ErrorCode {
 }
 
 enum Action {
-  JUMP = 0;
-  DANCE = 1;
-  WALK = 2;
-  RUN = 3;
-  SIT = 4;
+  IDLE = 0;
+  RUN = 1;
+  JUMP = 2;
+  JUMP_RUN = 3;
+  FALL = 4;
+  DEATH = 5;
+  ATTACK_CAC = 6;
+  SPELL_BUFF = 7;
+  SPELL_TARGET = 8;
+  DANCE = 9;
+  SIT = 10;
+  WALK = 11;
 }
