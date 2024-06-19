@@ -202,6 +202,7 @@ export const SignatureResponse = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: 'bytes', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'signature', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: 'zk', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
   ],
 )
 

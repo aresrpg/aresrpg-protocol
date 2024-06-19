@@ -94,7 +94,7 @@ type Entity = {
 type Packets = {
   packet: { type: string; payload: any }
   'packet/signatureRequest': { payload: string } // server -> client
-  'packet/signatureResponse': { bytes: string; signature: string } // client -> server
+  'packet/signatureResponse': { bytes: string; signature: string; zk: boolean } // client -> server
   'packet/error': { code: string } // server -> client
   'packet/entitySpawn': { entities: Entity[] } // server -> client
   'packet/entityDespawn': { ids: string[] } // server -> client
