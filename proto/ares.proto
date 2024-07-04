@@ -85,20 +85,16 @@ message Position {
 message SiblingEntity {
   string name = 1;
   uint32 level = 2;
+  string type = 3;
 }
 
 message Entity {
   string id = 1;
   string name = 2;
   Position position = 3;
-  EntityType type = 4;
+  string type = 4;
   uint32 level = 5;
   repeated SiblingEntity siblings = 8;
-}
-
-enum EntityType {
-  MOB = 0;
-  NPC = 1;
 }
 
 enum Classe {

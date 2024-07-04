@@ -80,6 +80,7 @@ type Position = {
 type SiblingEntity = {
   name: string
   level: number
+  type: string
 }
 
 type Entity = {
