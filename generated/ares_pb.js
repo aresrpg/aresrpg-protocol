@@ -256,6 +256,6 @@ export const Entity = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 4, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 5, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-    { no: 6, name: 'size', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: 'size', kind: 'scalar', T: 2 /* ScalarType.FLOAT */ },
   ],
 )
