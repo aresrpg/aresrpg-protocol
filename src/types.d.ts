@@ -77,19 +77,18 @@ type Position = {
   z: number
 }
 
-type SiblingEntity = {
-  name: string
-  level: number
-  type: string
-  size: number
-}
-
 type Entity = {
   id: string
   name: string
   type: string
   level: number
   size: number
+}
+
+type EntityGroup = {
+  id: string
+  position: Position
+  entities: Entity[]
 }
 
 type Packets = {
