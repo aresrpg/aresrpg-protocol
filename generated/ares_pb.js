@@ -75,9 +75,9 @@ export const Packet = /*@__PURE__*/ proto3.makeMessageType(
     },
     {
       no: 6,
-      name: 'entitySpawn',
+      name: 'entityGroupSpawn',
       kind: 'message',
-      T: EntitySpawn,
+      T: EntityGroupSpawn,
       oneof: 'type',
     },
     {
@@ -129,12 +129,14 @@ export const Error = /*@__PURE__*/ proto3.makeMessageType('ares.Error', () => [
 ])
 
 /**
- * @generated from message ares.EntitySpawn
+ * @generated from message ares.EntityGroupSpawn
  */
-export const EntitySpawn = /*@__PURE__*/ proto3.makeMessageType(
-  'ares.EntitySpawn',
+export const EntityGroupSpawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.EntityGroupSpawn',
   () => [
-    { no: 1, name: 'entities', kind: 'message', T: Entity, repeated: true },
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'position', kind: 'message', T: Position },
+    { no: 3, name: 'entities', kind: 'message', T: Entity, repeated: true },
   ],
 )
 
@@ -245,19 +247,6 @@ export const Position = /*@__PURE__*/ proto3.makeMessageType(
 )
 
 /**
- * @generated from message ares.SiblingEntity
- */
-export const SiblingEntity = /*@__PURE__*/ proto3.makeMessageType(
-  'ares.SiblingEntity',
-  () => [
-    { no: 1, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-    { no: 3, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: 'size', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-  ],
-)
-
-/**
  * @generated from message ares.Entity
  */
 export const Entity = /*@__PURE__*/ proto3.makeMessageType(
@@ -265,16 +254,8 @@ export const Entity = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: 'position', kind: 'message', T: Position },
     { no: 4, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 5, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
     { no: 6, name: 'size', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-    {
-      no: 7,
-      name: 'siblings',
-      kind: 'message',
-      T: SiblingEntity,
-      repeated: true,
-    },
   ],
 )

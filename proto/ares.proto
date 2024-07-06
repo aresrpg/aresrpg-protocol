@@ -8,7 +8,7 @@ message Packet {
     SignatureResponse signatureResponse = 3;
     CharacterAction characterAction = 4;
     CharacterPosition characterPosition = 5;
-    EntitySpawn entitySpawn = 6;
+    EntityGroupSpawn entityGroupSpawn = 6;
     EntityDespawn entityDespawn = 7;
     ServerInfo serverInfo = 8;
     ChatMessage chatMessage = 9;
@@ -27,8 +27,10 @@ message Error {
   ErrorCode code = 1;
 }
 
-message EntitySpawn {
-  repeated Entity entities = 1;
+message EntityGroupSpawn {
+  string id = 1;
+  Position position = 2;
+  repeated Entity entities = 3;
 }
 
 message EntityDespawn {
@@ -82,21 +84,12 @@ message Position {
   float z = 3;
 }
 
-message SiblingEntity {
-  string name = 1;
-  uint32 level = 2;
-  string type = 3;
-  uint32 size = 4;
-}
-
 message Entity {
   string id = 1;
   string name = 2;
-  Position position = 3;
   string type = 4;
   uint32 level = 5;
   uint32 size = 6;
-  repeated SiblingEntity siblings = 7;
 }
 
 enum Classe {

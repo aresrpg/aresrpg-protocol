@@ -87,11 +87,9 @@ type SiblingEntity = {
 type Entity = {
   id: string
   name: string
-  position: Position
   type: string
   level: number
   size: number
-  siblings: SiblingEntity[]
 }
 
 type Packets = {
@@ -99,7 +97,11 @@ type Packets = {
   'packet/signatureRequest': { payload: string } // server -> client
   'packet/signatureResponse': { bytes: string; signature: string; zk: boolean } // client -> server
   'packet/error': { code: string } // server -> client
-  'packet/entitySpawn': { entities: Entity[] } // server -> client
+  'packet/entityGroupSpawn': {
+    id: string
+    position: Position
+    entities: Entity[]
+  } // server -> client
   'packet/entityDespawn': { ids: string[] } // server -> client
   'packet/characterAction': { id: string; action: string } // both ways
   'packet/characterPosition': { id: string; position: Position } // both ways
