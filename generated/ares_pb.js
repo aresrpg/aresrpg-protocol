@@ -253,6 +253,7 @@ export const SiblingEntity = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
     { no: 3, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: 'size', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
   ],
 )
 
@@ -267,8 +268,9 @@ export const Entity = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: 'position', kind: 'message', T: Position },
     { no: 4, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 5, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    { no: 6, name: 'size', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
     {
-      no: 8,
+      no: 7,
       name: 'siblings',
       kind: 'message',
       T: SiblingEntity,

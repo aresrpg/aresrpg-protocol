@@ -86,6 +86,7 @@ message SiblingEntity {
   string name = 1;
   uint32 level = 2;
   string type = 3;
+  uint32 size = 4;
 }
 
 message Entity {
@@ -94,7 +95,8 @@ message Entity {
   Position position = 3;
   string type = 4;
   uint32 level = 5;
-  repeated SiblingEntity siblings = 8;
+  uint32 size = 6;
+  repeated SiblingEntity siblings = 7;
 }
 
 enum Classe {

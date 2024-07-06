@@ -81,6 +81,7 @@ type SiblingEntity = {
   name: string
   level: number
   type: string
+  size: number
 }
 
 type Entity = {
@@ -89,6 +90,7 @@ type Entity = {
   position: Position
   type: string
   level: number
+  size: number
   siblings: SiblingEntity[]
 }
 
