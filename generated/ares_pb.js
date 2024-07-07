@@ -84,7 +84,7 @@ export const Packet = /*@__PURE__*/ proto3.makeMessageType(
       no: 7,
       name: 'entityDespawn',
       kind: 'message',
-      T: EntityDespawn,
+      T: CharacterDespawn,
       oneof: 'type',
     },
     {
@@ -106,6 +106,34 @@ export const Packet = /*@__PURE__*/ proto3.makeMessageType(
       name: 'characterHealth',
       kind: 'message',
       T: CharacterHealth,
+      oneof: 'type',
+    },
+    {
+      no: 11,
+      name: 'characterAttackMobGroup',
+      kind: 'message',
+      T: CharacterAttackMobGroup,
+      oneof: 'type',
+    },
+    {
+      no: 12,
+      name: 'fightSpawn',
+      kind: 'message',
+      T: FightSpawn,
+      oneof: 'type',
+    },
+    {
+      no: 13,
+      name: 'entityGroupsDespawn',
+      kind: 'message',
+      T: EntityGroupsDespawn,
+      oneof: 'type',
+    },
+    {
+      no: 14,
+      name: 'fightsDespawn',
+      kind: 'message',
+      T: FightsDespawn,
       oneof: 'type',
     },
   ],
@@ -141,10 +169,42 @@ export const EntityGroupSpawn = /*@__PURE__*/ proto3.makeMessageType(
 )
 
 /**
- * @generated from message ares.EntityDespawn
+ * @generated from message ares.CharacterDespawn
  */
-export const EntityDespawn = /*@__PURE__*/ proto3.makeMessageType(
-  'ares.EntityDespawn',
+export const CharacterDespawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.CharacterDespawn',
+  () => [
+    {
+      no: 1,
+      name: 'ids',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      repeated: true,
+    },
+  ],
+)
+
+/**
+ * @generated from message ares.EntityGroupsDespawn
+ */
+export const EntityGroupsDespawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.EntityGroupsDespawn',
+  () => [
+    {
+      no: 1,
+      name: 'ids',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      repeated: true,
+    },
+  ],
+)
+
+/**
+ * @generated from message ares.FightsDespawn
+ */
+export const FightsDespawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.FightsDespawn',
   () => [
     {
       no: 1,
@@ -189,6 +249,30 @@ export const CharacterHealth = /*@__PURE__*/ proto3.makeMessageType(
 )
 
 /**
+ * @generated from message ares.FightSpawn
+ */
+export const FightSpawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.FightSpawn',
+  () => [
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: 'team1', kind: 'message', T: Entity, repeated: true },
+    { no: 3, name: 'team2', kind: 'message', T: Entity, repeated: true },
+    {
+      no: 4,
+      name: 'spectators',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      repeated: true,
+    },
+    { no: 5, name: 'top_left', kind: 'message', T: Position },
+    { no: 6, name: 'bottom_right', kind: 'message', T: Position },
+    { no: 7, name: 'started', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: 'locked', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
+    { no: 9, name: 'need_help', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
+  ],
+)
+
+/**
  * @generated from message ares.SignatureResponse
  */
 export const SignatureResponse = /*@__PURE__*/ proto3.makeMessageType(
@@ -197,6 +281,22 @@ export const SignatureResponse = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: 'bytes', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'signature', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 3, name: 'zk', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
+  ],
+)
+
+/**
+ * @generated from message ares.CharacterAttackMobGroup
+ */
+export const CharacterAttackMobGroup = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.CharacterAttackMobGroup',
+  () => [
+    { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    {
+      no: 2,
+      name: 'mob_group_id',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+    },
   ],
 )
 
@@ -254,8 +354,50 @@ export const Entity = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: 'id', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
     { no: 2, name: 'name', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
-    { no: 6, name: 'size', kind: 'scalar', T: 2 /* ScalarType.FLOAT */ },
+    { no: 3, name: 'position', kind: 'message', T: Position },
+    { no: 4, name: 'health', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    {
+      no: 5,
+      name: 'max_health',
+      kind: 'scalar',
+      T: 13 /* ScalarType.UINT32 */,
+    },
+    { no: 6, name: 'type', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: 'level', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    { no: 8, name: 'ap', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    { no: 9, name: 'mp', kind: 'scalar', T: 13 /* ScalarType.UINT32 */ },
+    {
+      no: 10,
+      name: 'earth_resistance',
+      kind: 'scalar',
+      T: 13 /* ScalarType.UINT32 */,
+    },
+    {
+      no: 11,
+      name: 'fire_resistance',
+      kind: 'scalar',
+      T: 13 /* ScalarType.UINT32 */,
+    },
+    {
+      no: 12,
+      name: 'water_resistance',
+      kind: 'scalar',
+      T: 13 /* ScalarType.UINT32 */,
+    },
+    {
+      no: 13,
+      name: 'air_resistance',
+      kind: 'scalar',
+      T: 13 /* ScalarType.UINT32 */,
+    },
+    {
+      no: 14,
+      name: 'effects',
+      kind: 'scalar',
+      T: 9 /* ScalarType.STRING */,
+      repeated: true,
+    },
+    { no: 15, name: 'size', kind: 'scalar', T: 2 /* ScalarType.FLOAT */ },
+    { no: 16, name: 'skin', kind: 'scalar', T: 9 /* ScalarType.STRING */ },
   ],
 )

@@ -9,10 +9,14 @@ message Packet {
     CharacterAction characterAction = 4;
     CharacterPosition characterPosition = 5;
     EntityGroupSpawn entityGroupSpawn = 6;
-    EntityDespawn entityDespawn = 7;
+    CharacterDespawn entityDespawn = 7;
     ServerInfo serverInfo = 8;
     ChatMessage chatMessage = 9;
     CharacterHealth characterHealth = 10;
+    CharacterAttackMobGroup characterAttackMobGroup = 11;
+    FightSpawn fightSpawn = 12;
+    EntityGroupsDespawn entityGroupsDespawn = 13;
+    FightsDespawn fightsDespawn = 14;
   }
 }
 
@@ -33,7 +37,15 @@ message EntityGroupSpawn {
   repeated Entity entities = 3;
 }
 
-message EntityDespawn {
+message CharacterDespawn {
+  repeated string ids = 1;
+}
+
+message EntityGroupsDespawn {
+  repeated string ids = 1;
+}
+
+message FightsDespawn {
   repeated string ids = 1;
 }
 
@@ -47,6 +59,18 @@ message CharacterHealth {
   uint32 health = 2;
 }
 
+message FightSpawn {
+  string id = 1;
+  repeated Entity team1 = 2;
+  repeated Entity team2 = 3;
+  repeated string spectators = 4;
+  Position top_left = 5;
+  Position bottom_right = 6;
+  bool started = 7;
+  bool locked = 8;
+  bool need_help = 9;
+}
+
 // ======================================== [CLIENT -> SERVER]
 // Packets sent from the client to the server
 
@@ -54,6 +78,11 @@ message SignatureResponse {
   string bytes = 1;
   string signature = 2;
   bool zk = 3;
+}
+
+message CharacterAttackMobGroup {
+  string id = 1;
+  string mob_group_id = 2;
 }
 
 // ======================================== [CLIENT <-> SERVER]
@@ -87,9 +116,20 @@ message Position {
 message Entity {
   string id = 1;
   string name = 2;
-  string type = 4;
-  uint32 level = 5;
-  float size = 6;
+  Position position = 3;
+  uint32 health = 4;
+  uint32 max_health = 5;
+  string type = 6;
+  uint32 level = 7;
+  uint32 ap = 8;
+  uint32 mp = 9;
+  uint32 earth_resistance = 10;
+  uint32 fire_resistance = 11;
+  uint32 water_resistance = 12;
+  uint32 air_resistance = 13;
+  repeated string effects = 14;
+  float size = 15;
+  string skin = 16;
 }
 
 enum Classe {

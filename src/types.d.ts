@@ -29,48 +29,6 @@ export interface TypedEmitter<T extends EventMap> {
   removeAllListeners(): this
 }
 
-export module 'events' {
-  interface StaticEventEmitterOptions {
-    signal?: AbortSignal | undefined
-  }
-
-  function on(
-    emitter: NodeJS.EventEmitter | EventTarget,
-    eventName: string,
-    options?: StaticEventEmitterOptions,
-  ): AsyncIterableIterator<any>
-  function on<T, K extends EventName<T>>(
-    emitter: TypedEmitter<T> | EventTarget,
-    eventName: K,
-    options?: StaticEventEmitterOptions,
-  ): AsyncIterableIterator<[T[K]]>
-  function on<T>(
-    emitter: TypedEmitter<T> | EventTarget,
-    eventName: string,
-    options?: StaticEventEmitterOptions,
-  ): AsyncIterableIterator<any>
-
-  class EventEmitter {
-    static on(
-      emitter: NodeJS.EventEmitter,
-      eventName: string,
-      options?: StaticEventEmitterOptions,
-    ): AsyncIterableIterator<any>
-
-    static on<T, K extends EventName<T>>(
-      emitter: TypedEmitter<T>,
-      eventName: K,
-      options?: StaticEventEmitterOptions,
-    ): AsyncIterableIterator<[T[K]]>
-
-    static on<T>(
-      emitter: TypedEmitter<T>,
-      eventName: string,
-      options?: StaticEventEmitterOptions,
-    ): AsyncIterableIterator<any>
-  }
-}
-
 type Position = {
   x: number
   y: number
@@ -81,14 +39,37 @@ type Entity = {
   id: string
   name: string
   type: string
+  skin: string
   level: number
   size: number
+  position: Position
+  health: number
+  max_health: number
+  ap: number
+  mp: number
+  earth_resistance: number
+  fire_resistance: number
+  water_resistance: number
+  air_resistance: number
+  effects: string[]
 }
 
 type EntityGroup = {
   id: string
   position: Position
   entities: Entity[]
+}
+
+type Fight = {
+  id: string
+  team1: Entity[]
+  team2: Entity[]
+  spectators: string[]
+  top_left: Position
+  bottom_right: Position
+  started: boolean
+  locked: boolean
+  need_help: boolean
 }
 
 type Packets = {
@@ -101,7 +82,8 @@ type Packets = {
     position: Position
     entities: Entity[]
   } // server -> client
-  'packet/entityDespawn': { ids: string[] } // server -> client
+  'packet/entityGroupsDespawn': { ids: string[] } // server -> client
+  'packet/charactersDespawn': { ids: string[] } // server -> client
   'packet/characterAction': { id: string; action: string } // both ways
   'packet/characterPosition': { id: string; position: Position } // both ways
   'packet/serverInfo': {
@@ -110,6 +92,9 @@ type Packets = {
   } // server -> client
   'packet/chatMessage': { id: string; message: string; address: string } // both ways
   'packet/characterHealth': { id: string; health: number } // server -> client
+  'packet/characterAttackMobGroup': { id: string; mob_group_id: string } // client -> server
+  'packet/fightSpawn': Fight // server -> client
+  'packet/fightsDespawn': { ids: string[] } // server -> client
 }
 
 type Packet = {
