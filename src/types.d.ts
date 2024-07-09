@@ -64,12 +64,15 @@ type Fight = {
   id: string
   team1: Entity[]
   team2: Entity[]
+  team1_positions: Position[]
+  team2_positions: Position[]
   spectators: string[]
   top_left: Position
   bottom_right: Position
   started: boolean
   locked: boolean
   need_help: boolean
+  start_time: number
 }
 
 type Packets = {

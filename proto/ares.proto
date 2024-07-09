@@ -69,6 +69,9 @@ message FightSpawn {
   bool started = 7;
   bool locked = 8;
   bool need_help = 9;
+  repeated Position team1_positions = 10;
+  repeated Position team2_positions = 11;
+  uint64 start_time = 12;
 }
 
 // ======================================== [CLIENT -> SERVER]

@@ -42,6 +42,7 @@ export function create_client({ socket_write, socket_end }) {
         const raw_packet = Packets.Packet.fromBinary(
           new Uint8Array(message),
         ).toJson({
+          useProtoFieldName: true,
           emitDefaultValues: true,
         })
         const [[type, value]] = Object.entries(raw_packet)

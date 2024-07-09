@@ -269,6 +269,26 @@ export const FightSpawn = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: 'started', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: 'locked', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: 'need_help', kind: 'scalar', T: 8 /* ScalarType.BOOL */ },
+    {
+      no: 10,
+      name: 'team1_positions',
+      kind: 'message',
+      T: Position,
+      repeated: true,
+    },
+    {
+      no: 11,
+      name: 'team2_positions',
+      kind: 'message',
+      T: Position,
+      repeated: true,
+    },
+    {
+      no: 12,
+      name: 'start_time',
+      kind: 'scalar',
+      T: 4 /* ScalarType.UINT64 */,
+    },
   ],
 )
 
