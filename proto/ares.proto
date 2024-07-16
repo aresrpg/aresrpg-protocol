@@ -9,7 +9,7 @@ message Packet {
     CharacterAction characterAction = 4;
     CharacterPosition characterPosition = 5;
     EntityGroupSpawn entityGroupSpawn = 6;
-    CharacterDespawn entityDespawn = 7;
+    CharactersDespawn charactersDespawn = 7;
     ServerInfo serverInfo = 8;
     ChatMessage chatMessage = 9;
     CharacterHealth characterHealth = 10;
@@ -37,7 +37,7 @@ message EntityGroupSpawn {
   repeated Entity entities = 3;
 }
 
-message CharacterDespawn {
+message CharactersDespawn {
   repeated string ids = 1;
 }
 

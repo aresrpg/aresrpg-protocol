@@ -82,9 +82,9 @@ export const Packet = /*@__PURE__*/ proto3.makeMessageType(
     },
     {
       no: 7,
-      name: 'entityDespawn',
+      name: 'charactersDespawn',
       kind: 'message',
-      T: CharacterDespawn,
+      T: CharactersDespawn,
       oneof: 'type',
     },
     {
@@ -169,10 +169,10 @@ export const EntityGroupSpawn = /*@__PURE__*/ proto3.makeMessageType(
 )
 
 /**
- * @generated from message ares.CharacterDespawn
+ * @generated from message ares.CharactersDespawn
  */
-export const CharacterDespawn = /*@__PURE__*/ proto3.makeMessageType(
-  'ares.CharacterDespawn',
+export const CharactersDespawn = /*@__PURE__*/ proto3.makeMessageType(
+  'ares.CharactersDespawn',
   () => [
     {
       no: 1,
