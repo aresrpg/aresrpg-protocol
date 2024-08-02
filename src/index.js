@@ -1,5 +1,7 @@
 import { PassThrough } from 'stream'
 
+import { fromBinary, toJson } from '@bufbuild/protobuf'
+
 import * as Packets from '../generated/ares_pb.js'
 
 export function create_client({ socket_write, socket_end }) {
@@ -39,12 +41,15 @@ export function create_client({ socket_write, socket_end }) {
     /** @type {(message: ArrayBuffer) => void} */
     notify_message(message) {
       try {
-        const raw_packet = Packets.Packet.fromBinary(
-          new Uint8Array(message),
-        ).toJson({
-          useProtoFieldName: true,
-          emitDefaultValues: true,
-        })
+        const raw_packet = toJson(
+          Packets.PacketSchema,
+          fromBinary(Packets.PacketSchema, new Uint8Array(message)),
+          {
+            useProtoFieldName: true,
+            // emitDefaultValues: true,
+            // alwaysEmitImplicit: true,
+          },
+        )
         const [[type, value]] = Object.entries(raw_packet)
 
         if (!type) throw new Error('Invalid packet')
