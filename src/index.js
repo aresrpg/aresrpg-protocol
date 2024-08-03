@@ -1,6 +1,6 @@
 import { PassThrough } from 'stream'
 
-import { fromBinary, toJson } from '@bufbuild/protobuf'
+import { fromBinary, fromJson, toBinary, toJson } from '@bufbuild/protobuf'
 
 import * as Packets from '../generated/ares_pb.js'
 
@@ -20,8 +20,10 @@ export function create_client({ socket_write, socket_end }) {
     send(raw_type, data) {
       const type = raw_type.slice(7)
       try {
-        // @ts-ignore
-        const buffer = Packets.Packet.fromJson({ [type]: data }).toBinary()
+        const buffer = toBinary(
+          Packets.PacketSchema,
+          fromJson(Packets.PacketSchema, { [type]: data }),
+        )
         socket_write(buffer)
       } catch (error) {
         console.dir({ type, data }, { depth: Infinity })
