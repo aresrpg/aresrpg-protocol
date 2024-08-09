@@ -29,6 +29,8 @@ export interface TypedEmitter<T extends EventMap> {
   removeAllListeners(): this
 }
 
+type Client = import('./index').Client
+
 type Position = {
   x: number
   y: number

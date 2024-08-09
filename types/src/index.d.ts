@@ -1,3 +1,4 @@
+/** @typedef {ReturnType<create_client>} Client */
 export function create_client({ socket_write, socket_end }: {
     socket_write: any;
     socket_end: any;
@@ -14,4 +15,5 @@ export function create_client({ socket_write, socket_end }: {
     /** @type {(message: ArrayBuffer) => void} */
     notify_message(message: ArrayBuffer): void;
 };
+export type Client = ReturnType<typeof create_client>;
 import { PassThrough } from 'stream';
