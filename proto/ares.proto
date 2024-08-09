@@ -17,6 +17,7 @@ message Packet {
     FightSpawn fightSpawn = 12;
     EntityGroupsDespawn entityGroupsDespawn = 13;
     FightsDespawn fightsDespawn = 14;
+    RequestResponse requestResponse = 15;
   }
 }
 
@@ -105,6 +106,11 @@ message ChatMessage {
   string id = 1;
   string message = 2;
   string address = 3;
+}
+
+message RequestResponse {
+  string id = 1;
+  string message = 2;
 }
 
 // ========================================

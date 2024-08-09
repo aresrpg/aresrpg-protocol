@@ -98,6 +98,7 @@ type Packets = {
   'packet/characterAttackMobGroup': { id: string; mob_group_id: string } // client -> server
   'packet/fightSpawn': Fight // server -> client
   'packet/fightsDespawn': { ids: string[] } // server -> client
+  'packet/requestResponse': { id: string; message: string } // server <-> client
 }
 
 type Packet = {
