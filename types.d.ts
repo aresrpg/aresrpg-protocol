@@ -1,7 +1,7 @@
-type EventMap = Record<string, any>
-type Await<T> = T extends Promise<infer U> ? U : T
-type EventName<T extends EventMap> = string & keyof T
-type EventListener<T> = (arg: T) => void
+export type EventMap = Record<string, any>
+export type Await<T> = T extends Promise<infer U> ? U : T
+export type EventName<T extends EventMap> = string & keyof T
+export type EventListener<T> = (arg: T) => void
 
 export interface TypedEmitter<T extends EventMap> {
   on<K extends EventName<T>>(eventName: K, listener: EventListener<T[K]>): this
@@ -29,13 +29,13 @@ export interface TypedEmitter<T extends EventMap> {
   removeAllListeners(): this
 }
 
-type Position = {
+export type Position = {
   x: number
   y: number
   z: number
 }
 
-type Entity = {
+export type Entity = {
   id: string
   name: string
   type: string
@@ -54,13 +54,13 @@ type Entity = {
   effects: string[]
 }
 
-type EntityGroup = {
+export type EntityGroup = {
   id: string
   position: Position
   entities: Entity[]
 }
 
-type Fight = {
+export type Fight = {
   id: string
   team1: Entity[]
   team2: Entity[]
@@ -75,7 +75,7 @@ type Fight = {
   start_time: number
 }
 
-type Packets = {
+export type Packets = {
   packet: { type: string; payload: any }
   'packet/signatureRequest': { payload: string } // server -> client
   'packet/signatureResponse': { bytes: string; signature: string; zk: boolean } // client -> server
@@ -101,7 +101,7 @@ type Packets = {
   'packet/requestResponse': { id: string; message: string } // server <-> client
 }
 
-type Packet = {
+export type Packet = {
   [K in keyof Packets]: { type: K; payload: Packets[K] }
 }[keyof Packets]
 

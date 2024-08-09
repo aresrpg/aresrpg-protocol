@@ -1,9 +1,7 @@
 {
   "name": "@aresrpg/aresrpg-protocol",
   "version": "5.0.6",
-  "main": "src/index.js",
   "type": "module",
-  "typings": "types/src/index.d.ts",
   "scripts": {
     "proto": "npx buf generate proto",
     "lint": "eslint . && prettier . --check && npm run typecheck",
@@ -11,8 +9,18 @@
     "format": "prettier . --write && eslint . --fix",
     "postversion": "git push --follow-tags"
   },
+  "engines": {
+    "node": ">=21.0.0"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./types/index.d.ts"
+    },
+    "./types": "./types.d.ts"
+  },
   "dependencies": {
-    "@bufbuild/buf": "^1.35.1",
+    "@bufbuild/buf": "^1.36.0",
     "@bufbuild/protobuf": "^2.0.0",
     "@bufbuild/protoc-gen-es": "^2.0.0",
     "spiralloop": "^1.0.2"
@@ -23,7 +31,6 @@
   "keywords": [],
   "author": "sceat",
   "license": "ISC",
-  "types": "src/types.d.ts",
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "7.25.1",
@@ -36,7 +43,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "^6.6.0",
     "husky": "^4.3.8",
-    "lint-staged": "15.2.7",
+    "lint-staged": "15.2.8",
     "prettier": "3.3.3",
     "typescript": "5.5.4"
   },

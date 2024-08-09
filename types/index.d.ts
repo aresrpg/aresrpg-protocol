@@ -4,8 +4,8 @@ export function create_client({ socket_write, socket_end }: {
 }): {
     controller: AbortController;
     stream: PassThrough;
-    /** @type {import("./types.js").send} */
-    send<T extends keyof import("./types.js").Packets>(type: T, payload: import("./types.js").Packets[T]): void;
+    /** @type {import("../types.js").send} */
+    send<T extends keyof import("../types.js").Packets>(type: T, payload: import("../types.js").Packets[T]): void;
     /** @type {(message: string) => void} */
     end(message: string): void;
     on_end: (handler: any) => any;

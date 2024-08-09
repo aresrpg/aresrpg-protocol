@@ -2,7 +2,7 @@ import { PassThrough } from 'stream'
 
 import { fromBinary, fromJson, toBinary, toJson } from '@bufbuild/protobuf'
 
-import * as Packets from '../generated/ares_pb.js'
+import * as Packets from './generated/ares_pb.js'
 
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
@@ -16,7 +16,7 @@ export function create_client({ socket_write, socket_end }) {
   return {
     controller,
     stream,
-    /** @type {import("./types.js").send} */
+    /** @type {import("../types.js").send} */
     send(raw_type, data) {
       const type = raw_type.slice(7)
       try {
