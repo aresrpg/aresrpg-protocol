@@ -4,8 +4,6 @@ import { fromBinary, fromJson, toBinary, toJson } from '@bufbuild/protobuf'
 
 import * as Packets from '../generated/ares_pb.js'
 
-/** @typedef {ReturnType<create_client>} Client */
-
 export function create_client({ socket_write, socket_end }) {
   const controller = new AbortController()
   const stream = new PassThrough({
