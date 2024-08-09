@@ -1,11 +1,11 @@
 {
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "types.d.ts"],
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
     "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "emitDeclarationOnly": true,

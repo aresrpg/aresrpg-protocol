@@ -16,7 +16,7 @@ export function create_client({ socket_write, socket_end }) {
   return {
     controller,
     stream,
-    /** @type {import("./types").send} */
+    /** @type {import("./types.js").send} */
     send(raw_type, data) {
       const type = raw_type.slice(7)
       try {
