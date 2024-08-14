@@ -79,7 +79,6 @@ export type Packets = {
   packet: { type: string; payload: any }
   'packet/signatureRequest': { payload: string } // server -> client
   'packet/signatureResponse': { bytes: string; signature: string; zk: boolean } // client -> server
-  'packet/error': { code: string } // server -> client
   'packet/entityGroupSpawn': {
     id: string
     position: Position
@@ -99,6 +98,7 @@ export type Packets = {
   'packet/fightSpawn': Fight // server -> client
   'packet/fightsDespawn': { ids: string[] } // server -> client
   'packet/requestResponse': { id: string; message: string } // server <-> client
+  'packet/suiEvent': { event: string; data: string } // server -> client
 }
 
 export type Packet = {

@@ -4,20 +4,26 @@ package ares;
 message Packet {
   oneof type {
     SignatureRequest signatureRequest = 1;
-    Error error = 2;
     SignatureResponse signatureResponse = 3;
+
     CharacterAction characterAction = 4;
     CharacterPosition characterPosition = 5;
-    EntityGroupSpawn entityGroupSpawn = 6;
     CharactersDespawn charactersDespawn = 7;
-    ServerInfo serverInfo = 8;
-    ChatMessage chatMessage = 9;
     CharacterHealth characterHealth = 10;
     CharacterAttackMobGroup characterAttackMobGroup = 11;
-    FightSpawn fightSpawn = 12;
+
+    EntityGroupSpawn entityGroupSpawn = 6;
     EntityGroupsDespawn entityGroupsDespawn = 13;
+
+    ServerInfo serverInfo = 8;
+
+    ChatMessage chatMessage = 9;
+
+    FightSpawn fightSpawn = 12;
     FightsDespawn fightsDespawn = 14;
+
     RequestResponse requestResponse = 15;
+    SuiEvent suiEvent = 16;
   }
 }
 
@@ -73,6 +79,11 @@ message FightSpawn {
   repeated Position team1_positions = 10;
   repeated Position team2_positions = 11;
   uint64 start_time = 12;
+}
+
+message SuiEvent {
+  string event = 1;
+  string data = 2;
 }
 
 // ======================================== [CLIENT -> SERVER]
