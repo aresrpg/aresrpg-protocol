@@ -24,6 +24,9 @@ message Packet {
 
     RequestResponse requestResponse = 15;
     SuiEvent suiEvent = 16;
+
+    MarketItemCategory marketItemCategory = 17;
+    MarketItemCategoryRequest marketItemCategoryRequest = 18;
   }
 }
 
@@ -86,6 +89,10 @@ message SuiEvent {
   string data = 2;
 }
 
+message MarketItemCategory {
+  repeated MarketCategoryItem items = 1;
+}
+
 // ======================================== [CLIENT -> SERVER]
 // Packets sent from the client to the server
 
@@ -98,6 +105,10 @@ message SignatureResponse {
 message CharacterAttackMobGroup {
   string id = 1;
   string mob_group_id = 2;
+}
+
+message MarketItemCategoryRequest {
+  string category = 1;
 }
 
 // ======================================== [CLIENT <-> SERVER]
@@ -127,6 +138,14 @@ message RequestResponse {
 // ========================================
 // Types used by packets
 
+message MarketCategoryItem {
+  string item_type = 1;
+  string image_url = 2;
+  string name = 3;
+  uint32 item_count = 4;
+  string price_floor = 5;
+}
+
 message Position {
   float x = 1;
   float y = 2;
@@ -153,8 +172,8 @@ message Entity {
 }
 
 enum Classe {
-  IOP = 0;
-  SRAM = 1;
+  SENSHI = 0;
+  YAJIN = 1;
 }
 
 enum ErrorCode {

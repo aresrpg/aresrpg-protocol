@@ -83,6 +83,22 @@ export const FightSpawnSchema: import('@bufbuild/protobuf/codegenv1').GenMessage
   import('@bufbuild/protobuf').JsonValue
 >
 /**
+ * Describes the message ares.SuiEvent.
+ * Use `create(SuiEventSchema)` to create a new message.
+ */
+export const SuiEventSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
+ * Describes the message ares.MarketItemCategories.
+ * Use `create(MarketItemCategoriesSchema)` to create a new message.
+ */
+export const MarketItemCategoriesSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
  * Describes the message ares.SignatureResponse.
  * Use `create(SignatureResponseSchema)` to create a new message.
  */
@@ -95,6 +111,14 @@ export const SignatureResponseSchema: import('@bufbuild/protobuf/codegenv1').Gen
  * Use `create(CharacterAttackMobGroupSchema)` to create a new message.
  */
 export const CharacterAttackMobGroupSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
+ * Describes the message ares.MarketItemCategoriesRequest.
+ * Use `create(MarketItemCategoriesRequestSchema)` to create a new message.
+ */
+export const MarketItemCategoriesRequestSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
   import('@bufbuild/protobuf').Message,
   import('@bufbuild/protobuf').JsonValue
 >
@@ -127,6 +151,14 @@ export const ChatMessageSchema: import('@bufbuild/protobuf/codegenv1').GenMessag
  * Use `create(RequestResponseSchema)` to create a new message.
  */
 export const RequestResponseSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
+ * Describes the message ares.MarketCategoryItem.
+ * Use `create(MarketCategoryItemSchema)` to create a new message.
+ */
+export const MarketCategoryItemSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
   import('@bufbuild/protobuf').Message,
   import('@bufbuild/protobuf').JsonValue
 >
