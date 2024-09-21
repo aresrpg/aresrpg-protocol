@@ -25,8 +25,10 @@ message Packet {
     RequestResponse requestResponse = 15;
     SuiEvent suiEvent = 16;
 
-    MarketItemCategory marketItemCategory = 17;
-    MarketItemCategoryRequest marketItemCategoryRequest = 18;
+    MarketCategoryItem marketCategoryItem = 17;
+    MarketCategoryItemsRequest marketCategoryItemsRequest = 18;
+    MarketItemListings marketItemListings = 19;
+    MarketItemListingsRequest marketItemListingsRequest = 20;
   }
 }
 
@@ -89,8 +91,16 @@ message SuiEvent {
   string data = 2;
 }
 
-message MarketItemCategory {
-  repeated MarketCategoryItem items = 1;
+message MarketCategoryItem {
+  string item_type = 1;
+  string image_url = 2;
+  string name = 3;
+  uint32 item_count = 4;
+  string price_floor = 5;
+}
+
+message MarketItemListings {
+  repeated string listings = 1;
 }
 
 // ======================================== [CLIENT -> SERVER]
@@ -107,8 +117,14 @@ message CharacterAttackMobGroup {
   string mob_group_id = 2;
 }
 
-message MarketItemCategoryRequest {
+message MarketCategoryItemsRequest {
   string category = 1;
+}
+
+message MarketItemListingsRequest {
+  string item_type = 1;
+  uint32 start = 2;
+  uint32 limit = 3;
 }
 
 // ======================================== [CLIENT <-> SERVER]
@@ -137,14 +153,6 @@ message RequestResponse {
 
 // ========================================
 // Types used by packets
-
-message MarketCategoryItem {
-  string item_type = 1;
-  string image_url = 2;
-  string name = 3;
-  uint32 item_count = 4;
-  string price_floor = 5;
-}
 
 message Position {
   float x = 1;

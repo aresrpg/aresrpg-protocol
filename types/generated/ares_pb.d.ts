@@ -91,10 +91,18 @@ export const SuiEventSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
   import('@bufbuild/protobuf').JsonValue
 >
 /**
- * Describes the message ares.MarketItemCategories.
- * Use `create(MarketItemCategoriesSchema)` to create a new message.
+ * Describes the message ares.MarketItemCategory.
+ * Use `create(MarketItemCategorySchema)` to create a new message.
  */
-export const MarketItemCategoriesSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+export const MarketItemCategorySchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
+ * Describes the message ares.MarketItemListings.
+ * Use `create(MarketItemListingsSchema)` to create a new message.
+ */
+export const MarketItemListingsSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
   import('@bufbuild/protobuf').Message,
   import('@bufbuild/protobuf').JsonValue
 >
@@ -115,10 +123,18 @@ export const CharacterAttackMobGroupSchema: import('@bufbuild/protobuf/codegenv1
   import('@bufbuild/protobuf').JsonValue
 >
 /**
- * Describes the message ares.MarketItemCategoriesRequest.
- * Use `create(MarketItemCategoriesRequestSchema)` to create a new message.
+ * Describes the message ares.MarketItemCategoryRequest.
+ * Use `create(MarketItemCategoryRequestSchema)` to create a new message.
  */
-export const MarketItemCategoriesRequestSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+export const MarketItemCategoryRequestSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
+  import('@bufbuild/protobuf').Message,
+  import('@bufbuild/protobuf').JsonValue
+>
+/**
+ * Describes the message ares.MarketItemListingsRequest.
+ * Use `create(MarketItemListingsRequestSchema)` to create a new message.
+ */
+export const MarketItemListingsRequestSchema: import('@bufbuild/protobuf/codegenv1').GenMessage<
   import('@bufbuild/protobuf').Message,
   import('@bufbuild/protobuf').JsonValue
 >

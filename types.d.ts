@@ -99,16 +99,20 @@ export type Packets = {
   'packet/fightsDespawn': { ids: string[] } // server -> client
   'packet/requestResponse': { id: string; message: string } // server <-> client
   'packet/suiEvent': { event: string; data: string } // server -> client
-  'packet/marketItemCategoryRequest': { category: string } // client -> server
-  'packet/marketItemCategory': {
-    items: {
-      item_type: string
-      image_url: string
-      name: string
-      item_count: number
-      price_floor: string
-    }[]
+  'packet/marketCategoryItemsRequest': { category: string } // client -> server
+  'packet/marketItemListingsRequest': {
+    item_type: string
+    start: number
+    limit: number
+  } // client -> server
+  'packet/marketCategoryItem': {
+    item_type: string
+    image_url: string
+    name: string
+    item_count: number
+    price_floor: string
   }
+  'packet/marketItemListings': { listings: string[] }
 }
 
 export type Packet = {
