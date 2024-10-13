@@ -29,6 +29,8 @@ message Packet {
     MarketCategoryItemsRequest marketCategoryItemsRequest = 18;
     MarketItemListings marketItemListings = 19;
     MarketItemListingsRequest marketItemListingsRequest = 20;
+
+    ConnectionAccepted connectionAccepted = 21;
   }
 }
 
@@ -101,6 +103,10 @@ message MarketCategoryItem {
 
 message MarketItemListings {
   repeated string listings = 1;
+}
+
+message ConnectionAccepted {
+  string address = 1;
 }
 
 // ======================================== [CLIENT -> SERVER]

@@ -113,6 +113,7 @@ export type Packets = {
     price_floor: string
   }
   'packet/marketItemListings': { listings: string[] }
+  'packet/connectionAccepted': { address: string } // server -> client
 }
 
 export type Packet = {
