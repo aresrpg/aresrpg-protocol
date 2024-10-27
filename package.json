@@ -1,6 +1,6 @@
 {
   "name": "@aresrpg/aresrpg-protocol",
-  "version": "5.0.9",
+  "version": "5.0.10",
   "type": "module",
   "scripts": {
     "proto": "npx buf generate proto",
