@@ -105,14 +105,16 @@ export type Packets = {
     start: number
     limit: number
   } // client -> server
-  'packet/marketCategoryItem': {
-    item_type: string
-    image_url: string
-    name: string
-    item_count: number
-    price_floor: string
-  }
-  'packet/marketItemListings': { listings: string[] }
+  'packet/marketCategoryItems': {
+    items: {
+      item_type: string
+      image_url: string
+      name: string
+      item_count: number
+      price_floor: string
+    }[]
+  } // server -> client
+  'packet/marketItemListings': { listings: string[] } // server -> client
   'packet/connectionAccepted': { address: string } // server -> client
 }
 

@@ -63,6 +63,11 @@ export const SuiEventSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<i
  */
 export const MarketCategoryItemSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.MarketCategoryItems.
+ * Use `create(MarketCategoryItemsSchema)` to create a new message.
+ */
+export const MarketCategoryItemsSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.MarketItemListings.
  * Use `create(MarketItemListingsSchema)` to create a new message.
  */

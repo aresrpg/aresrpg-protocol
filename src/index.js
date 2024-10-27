@@ -48,8 +48,7 @@ export function create_client({ socket_write, socket_end }) {
           fromBinary(Packets.PacketSchema, new Uint8Array(message)),
           {
             useProtoFieldName: true,
-            // emitDefaultValues: true,
-            // alwaysEmitImplicit: true,
+            alwaysEmitImplicit: true,
           },
         )
         const [[type, value]] = Object.entries(raw_packet)

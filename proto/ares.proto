@@ -25,7 +25,7 @@ message Packet {
     RequestResponse requestResponse = 15;
     SuiEvent suiEvent = 16;
 
-    MarketCategoryItem marketCategoryItem = 17;
+    MarketCategoryItems marketCategoryItems = 17;
     MarketCategoryItemsRequest marketCategoryItemsRequest = 18;
     MarketItemListings marketItemListings = 19;
     MarketItemListingsRequest marketItemListingsRequest = 20;
@@ -99,6 +99,10 @@ message MarketCategoryItem {
   string name = 3;
   uint32 item_count = 4;
   string price_floor = 5;
+}
+
+message MarketCategoryItems {
+  repeated MarketCategoryItem items = 1;
 }
 
 message MarketItemListings {
