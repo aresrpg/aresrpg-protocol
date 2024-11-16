@@ -78,6 +78,11 @@ export const MarketItemListingsSchema: import("@bufbuild/protobuf/codegenv1").Ge
  */
 export const ConnectionAcceptedSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.TransactionSignRequest.
+ * Use `create(TransactionSignRequestSchema)` to create a new message.
+ */
+export const TransactionSignRequestSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.SignatureResponse.
  * Use `create(SignatureResponseSchema)` to create a new message.
  */
@@ -97,6 +102,16 @@ export const MarketCategoryItemsRequestSchema: import("@bufbuild/protobuf/codege
  * Use `create(MarketItemListingsRequestSchema)` to create a new message.
  */
 export const MarketItemListingsRequestSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
+ * Describes the message ares.UseItem.
+ * Use `create(UseItemSchema)` to create a new message.
+ */
+export const UseItemSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
+ * Describes the message ares.TransactionSignResponse.
+ * Use `create(TransactionSignResponseSchema)` to create a new message.
+ */
+export const TransactionSignResponseSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
  * Describes the message ares.CharacterAction.
  * Use `create(CharacterActionSchema)` to create a new message.

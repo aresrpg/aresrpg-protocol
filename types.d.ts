@@ -25,7 +25,7 @@ export interface TypedEmitter<T extends EventMap> {
   emit<K extends EventName<T>>(eventName: K, arg: T[K]): boolean
   emit(eventName: string | symbol, arg: any): boolean
 
-  setMaxListeners(number): this
+  setMaxListeners(number: number): this
   removeAllListeners(): this
 }
 
@@ -116,6 +116,9 @@ export type Packets = {
   } // server -> client
   'packet/marketItemListings': { listings: string[] } // server -> client
   'packet/connectionAccepted': { address: string } // server -> client
+  'packet/useItem': { item_id: string; character_id: string } // client -> server
+  'packet/transactionSignRequest': { id: string; bytes: string } // server -> client
+  'packet/transactionSignResponse': { id: string; signature: string } // client -> server
 }
 
 export type Packet = {
