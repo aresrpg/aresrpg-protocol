@@ -103,15 +103,20 @@ export const MarketCategoryItemsRequestSchema: import("@bufbuild/protobuf/codege
  */
 export const MarketItemListingsRequestSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
- * Describes the message ares.UseItem.
- * Use `create(UseItemSchema)` to create a new message.
+ * Describes the message ares.TransactionCreate.
+ * Use `create(TransactionCreateSchema)` to create a new message.
  */
-export const UseItemSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+export const TransactionCreateSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
  * Describes the message ares.TransactionSignResponse.
  * Use `create(TransactionSignResponseSchema)` to create a new message.
  */
 export const TransactionSignResponseSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
+ * Describes the message ares.TransactionResult.
+ * Use `create(TransactionResultSchema)` to create a new message.
+ */
+export const TransactionResultSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
  * Describes the message ares.CharacterAction.
  * Use `create(CharacterActionSchema)` to create a new message.

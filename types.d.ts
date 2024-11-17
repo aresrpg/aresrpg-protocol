@@ -116,9 +116,10 @@ export type Packets = {
   } // server -> client
   'packet/marketItemListings': { listings: string[] } // server -> client
   'packet/connectionAccepted': { address: string } // server -> client
-  'packet/useItem': { item_id: string; character_id: string } // client -> server
+  'packet/transactionCreate': { id: string; message: string } // client -> server
   'packet/transactionSignRequest': { id: string; bytes: string } // server -> client
   'packet/transactionSignResponse': { id: string; signature: string } // client -> server
+  'packet/transactionResult': { id: string; digest: string; success: boolean } // client -> server
 }
 
 export type Packet = {

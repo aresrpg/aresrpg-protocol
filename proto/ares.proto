@@ -32,9 +32,10 @@ message Packet {
 
     ConnectionAccepted connectionAccepted = 21;
 
-    UseItem useItem = 22;
+    TransactionCreate transactionCreate = 22;
     TransactionSignRequest transactionSignRequest = 23;
     TransactionSignResponse transactionSignResponse = 24;
+    TransactionResult transactionResult = 25;
   }
 }
 
@@ -146,14 +147,20 @@ message MarketItemListingsRequest {
   uint32 limit = 3;
 }
 
-message UseItem {
-  string item_id = 1;
-  string character_id = 2;
+message TransactionCreate {
+  string id = 1;
+  string message = 2;
 }
 
 message TransactionSignResponse {
   string id = 1;
   string signature = 2;
+}
+
+message TransactionResult {
+  string id = 1;
+  string digest = 2;
+  bool success = 3;
 }
 
 // ======================================== [CLIENT <-> SERVER]
