@@ -83,6 +83,11 @@ export const ConnectionAcceptedSchema: import("@bufbuild/protobuf/codegenv1").Ge
  */
 export const TransactionSignRequestSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.Failure.
+ * Use `create(FailureSchema)` to create a new message.
+ */
+export const FailureSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.SignatureResponse.
  * Use `create(SignatureResponseSchema)` to create a new message.
  */

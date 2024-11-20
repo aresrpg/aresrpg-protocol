@@ -36,6 +36,8 @@ message Packet {
     TransactionSignRequest transactionSignRequest = 23;
     TransactionSignResponse transactionSignResponse = 24;
     TransactionResult transactionResult = 25;
+
+    Failure failure = 26;
   }
 }
 
@@ -121,6 +123,10 @@ message ConnectionAccepted {
 message TransactionSignRequest {
   string id = 1;
   string bytes = 2;
+}
+
+message Failure {
+  string message = 1;
 }
 
 // ======================================== [CLIENT -> SERVER]

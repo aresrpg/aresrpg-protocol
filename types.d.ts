@@ -120,6 +120,7 @@ export type Packets = {
   'packet/transactionSignRequest': { id: string; bytes: string } // server -> client
   'packet/transactionSignResponse': { id: string; signature: string } // client -> server
   'packet/transactionResult': { id: string; digest: string; success: boolean } // client -> server
+  'packet/failure': { message: string } // server -> client
 }
 
 export type Packet = {
