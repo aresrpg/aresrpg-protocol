@@ -161,6 +161,7 @@ message TransactionCreate {
 message TransactionSignResponse {
   string id = 1;
   string signature = 2;
+  bool zk = 3;
 }
 
 message TransactionResult {

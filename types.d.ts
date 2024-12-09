@@ -118,7 +118,11 @@ export type Packets = {
   'packet/connectionAccepted': { address: string } // server -> client
   'packet/transactionCreate': { id: string; message: string } // client -> server
   'packet/transactionSignRequest': { id: string; bytes: string } // server -> client
-  'packet/transactionSignResponse': { id: string; signature: string } // client -> server
+  'packet/transactionSignResponse': {
+    id: string
+    signature: string
+    zk: boolean
+  } // client -> server
   'packet/transactionResult': { id: string; digest: string; success: boolean } // client -> server
   'packet/failure': { message: string } // server -> client
 }
