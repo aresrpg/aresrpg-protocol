@@ -78,7 +78,7 @@ export type Fight = {
 export type Packets = {
   packet: { type: string; payload: any }
   'packet/signatureRequest': { payload: string } // server -> client
-  'packet/signatureResponse': { bytes: string; signature: string; zk: boolean } // client -> server
+  'packet/signatureResponse': { bytes: string; signature: string } // client -> server
   'packet/entityGroupSpawn': {
     id: string
     position: Position
@@ -121,7 +121,6 @@ export type Packets = {
   'packet/transactionSignResponse': {
     id: string
     signature: string
-    zk: boolean
   } // client -> server
   'packet/transactionResult': { id: string; digest: string; success: boolean } // client -> server
   'packet/failure': { message: string } // server -> client
