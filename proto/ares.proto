@@ -85,14 +85,11 @@ message FightSpawn {
   repeated Entity team1 = 2;
   repeated Entity team2 = 3;
   repeated string spectators = 4;
-  Position top_left = 5;
-  Position bottom_right = 6;
-  bool started = 7;
-  bool locked = 8;
-  bool need_help = 9;
-  repeated Position team1_positions = 10;
-  repeated Position team2_positions = 11;
-  uint64 start_time = 12;
+  Position position = 5;
+  bool started = 6;
+  bool locked = 7;
+  bool need_help = 8;
+  uint64 start_time = 9;
 }
 
 message SuiEvent {
