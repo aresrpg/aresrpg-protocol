@@ -88,6 +88,11 @@ export const TransactionSignRequestSchema: import("@bufbuild/protobuf/codegenv1"
  */
 export const FailureSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.Chunk.
+ * Use `create(ChunkSchema)` to create a new message.
+ */
+export const ChunkSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.SignatureResponse.
  * Use `create(SignatureResponseSchema)` to create a new message.
  */

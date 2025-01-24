@@ -38,6 +38,8 @@ message Packet {
     TransactionResult transactionResult = 25;
 
     Failure failure = 26;
+
+    Chunk chunk = 27;
   }
 }
 
@@ -124,6 +126,11 @@ message TransactionSignRequest {
 
 message Failure {
   string message = 1;
+}
+
+message Chunk {
+  string key = 1;
+  string column = 2;
 }
 
 // ======================================== [CLIENT -> SERVER]

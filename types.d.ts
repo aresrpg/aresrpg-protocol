@@ -121,6 +121,7 @@ export type Packets = {
   } // client -> server
   'packet/transactionResult': { id: string; digest: string; success: boolean } // client -> server
   'packet/failure': { message: string } // server -> client
+  'packet/chunk': { key: string; column: string }
 }
 
 export type Packet = {
