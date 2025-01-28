@@ -40,6 +40,8 @@ message Packet {
     Failure failure = 26;
 
     Chunk chunk = 27;
+
+    ServerCommand serverCommand = 28;
   }
 }
 
@@ -170,6 +172,11 @@ message TransactionResult {
   string id = 1;
   string digest = 2;
   bool success = 3;
+}
+
+message ServerCommand {
+  string command = 1;
+  repeated string args = 2;
 }
 
 // ======================================== [CLIENT <-> SERVER]

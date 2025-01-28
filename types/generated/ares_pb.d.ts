@@ -128,6 +128,11 @@ export const TransactionSignResponseSchema: import("@bufbuild/protobuf/codegenv1
  */
 export const TransactionResultSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.ServerCommand.
+ * Use `create(ServerCommandSchema)` to create a new message.
+ */
+export const ServerCommandSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.CharacterAction.
  * Use `create(CharacterActionSchema)` to create a new message.
  */
