@@ -123,6 +123,7 @@ export type Packets = {
   'packet/failure': { message: string } // server -> client
   'packet/chunk': { key: string; column: string }
   'packet/serverCommand': { command: string; args: string[] } // client -> server
+  'packet/fightMoveToCell': { id: string; cell: number } // client <-> server
 }
 
 export type Packet = {

@@ -203,6 +203,11 @@ message RequestResponse {
   string message = 2;
 }
 
+message FightMoveToCell {
+  string id = 1;
+  uint32 cell = 2;
+}
+
 // ========================================
 // Types used by packets
 

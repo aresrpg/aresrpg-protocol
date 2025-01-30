@@ -153,6 +153,11 @@ export const ChatMessageSchema: import("@bufbuild/protobuf/codegenv1").GenMessag
  */
 export const RequestResponseSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.FightMoveToCell.
+ * Use `create(FightMoveToCellSchema)` to create a new message.
+ */
+export const FightMoveToCellSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.Position.
  * Use `create(PositionSchema)` to create a new message.
  */
