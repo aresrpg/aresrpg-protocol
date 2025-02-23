@@ -226,10 +226,10 @@ message Entity {
   uint32 level = 6;
   uint32 ap = 7;
   uint32 mp = 8;
-  uint32 earth_resistance = 9;
-  uint32 fire_resistance = 10;
-  uint32 water_resistance = 11;
-  uint32 air_resistance = 12;
+  int32 earth_resistance = 9;
+  int32 fire_resistance = 10;
+  int32 water_resistance = 11;
+  int32 air_resistance = 12;
   repeated string effects = 13;
   float size = 14;
   string skin = 15;
