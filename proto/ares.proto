@@ -234,6 +234,7 @@ message Entity {
   repeated string effects = 14;
   float size = 15;
   string skin = 16;
+  string variant = 17;
 }
 
 enum Classe {

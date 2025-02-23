@@ -40,6 +40,7 @@ export type Entity = {
   name: string
   type: string
   skin: string
+  variant: string
   level: number
   size: number
   position: Position
