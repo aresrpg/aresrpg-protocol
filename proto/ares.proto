@@ -223,18 +223,17 @@ message Entity {
   Position position = 3;
   uint32 health = 4;
   uint32 max_health = 5;
-  string type = 6;
-  uint32 level = 7;
-  uint32 ap = 8;
-  uint32 mp = 9;
-  uint32 earth_resistance = 10;
-  uint32 fire_resistance = 11;
-  uint32 water_resistance = 12;
-  uint32 air_resistance = 13;
-  repeated string effects = 14;
-  float size = 15;
-  string skin = 16;
-  string variant = 17;
+  uint32 level = 6;
+  uint32 ap = 7;
+  uint32 mp = 8;
+  uint32 earth_resistance = 9;
+  uint32 fire_resistance = 10;
+  uint32 water_resistance = 11;
+  uint32 air_resistance = 12;
+  repeated string effects = 13;
+  float size = 14;
+  string skin = 15;
+  string variant = 16;
 }
 
 enum Classe {
