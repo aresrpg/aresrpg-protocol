@@ -38,7 +38,7 @@ export type Position = {
 export type Entity = {
   id: string
   name: string
-  skin: string
+  type: string
   variant: string
   level: number
   size: number

@@ -232,7 +232,7 @@ message Entity {
   int32 air_resistance = 12;
   repeated string effects = 13;
   float size = 14;
-  string skin = 15;
+  string type = 15;
   string variant = 16;
 }
 
