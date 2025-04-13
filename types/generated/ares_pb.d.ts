@@ -53,6 +53,11 @@ export const CharacterHealthSchema: import("@bufbuild/protobuf/codegenv1").GenMe
  */
 export const FightSpawnSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
+ * Describes the message ares.FightBorders.
+ * Use `create(FightBordersSchema)` to create a new message.
+ */
+export const FightBordersSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
  * Describes the message ares.SuiEvent.
  * Use `create(SuiEventSchema)` to create a new message.
  */
@@ -132,6 +137,11 @@ export const TransactionResultSchema: import("@bufbuild/protobuf/codegenv1").Gen
  * Use `create(ServerCommandSchema)` to create a new message.
  */
 export const ServerCommandSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
+/**
+ * Describes the message ares.SelectCharacter.
+ * Use `create(SelectCharacterSchema)` to create a new message.
+ */
+export const SelectCharacterSchema: import("@bufbuild/protobuf/codegenv1").GenMessage<import("@bufbuild/protobuf").Message, import("@bufbuild/protobuf").JsonValue>;
 /**
  * Describes the message ares.CharacterAction.
  * Use `create(CharacterActionSchema)` to create a new message.

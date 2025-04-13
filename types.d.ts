@@ -70,6 +70,10 @@ export type Fight = {
   locked: boolean
   need_help: boolean
   start_time: number
+  cells: number[]
+  borders: { min_x: number; max_x: number; min_y: number; max_y: number }
+  team_1_positions: Position[]
+  team_2_positions: Position[]
 }
 
 export type Packets = {
@@ -124,6 +128,7 @@ export type Packets = {
   'packet/chunk': { key: string; column: string }
   'packet/serverCommand': { command: string; args: string[] } // client -> server
   'packet/fightMoveToCell': { id: string; cell: number } // client <-> server
+  'packet/selectCharacter': { id: string } // client -> server
 }
 
 export type Packet = {

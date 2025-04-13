@@ -94,6 +94,17 @@ message FightSpawn {
   bool locked = 7;
   bool need_help = 8;
   uint64 start_time = 9;
+  repeated uint32 cells = 10;
+  FightBorders borders = 11;
+  repeated Position team_1_positions = 12;
+  repeated Position team_2_positions = 13;
+}
+
+message FightBorders {
+  uint64 min_x = 1;
+  uint64 max_x = 2;
+  uint64 min_y = 3;
+  uint64 max_y = 4;
 }
 
 message SuiEvent {
@@ -177,6 +188,10 @@ message TransactionResult {
 message ServerCommand {
   string command = 1;
   repeated string args = 2;
+}
+
+message SelectCharacter {
+  string id = 1;
 }
 
 // ======================================== [CLIENT <-> SERVER]
