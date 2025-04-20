@@ -4,44 +4,45 @@ package ares;
 message Packet {
   oneof type {
     SignatureRequest signatureRequest = 1;
-    SignatureResponse signatureResponse = 3;
+    SignatureResponse signatureResponse = 2;
 
-    CharacterAction characterAction = 4;
-    CharacterPosition characterPosition = 5;
-    CharactersDespawn charactersDespawn = 7;
-    CharacterHealth characterHealth = 10;
-    CharacterAttackMobGroup characterAttackMobGroup = 11;
+    CharacterAction characterAction = 3;
+    CharacterPosition characterPosition = 4;
+    CharactersDespawn charactersDespawn = 5;
+    CharacterHealth characterHealth = 6;
+    CharacterAttackMobGroup characterAttackMobGroup = 7;
 
-    EntityGroupSpawn entityGroupSpawn = 6;
-    EntityGroupsDespawn entityGroupsDespawn = 13;
+    EntityGroupSpawn entityGroupSpawn = 8;
+    EntityGroupsDespawn entityGroupsDespawn = 9;
 
-    ServerInfo serverInfo = 8;
+    ServerInfo serverInfo = 10;
 
-    ChatMessage chatMessage = 9;
+    ChatMessage chatMessage = 11;
 
     FightSpawn fightSpawn = 12;
-    FightsDespawn fightsDespawn = 14;
+    FightsDespawn fightsDespawn = 13;
 
-    RequestResponse requestResponse = 15;
-    SuiEvent suiEvent = 16;
+    RequestResponse requestResponse = 14;
+    SuiEvent suiEvent = 15;
 
-    MarketCategoryItems marketCategoryItems = 17;
-    MarketCategoryItemsRequest marketCategoryItemsRequest = 18;
-    MarketItemListings marketItemListings = 19;
-    MarketItemListingsRequest marketItemListingsRequest = 20;
+    MarketCategoryItems marketCategoryItems = 16;
+    MarketCategoryItemsRequest marketCategoryItemsRequest = 17;
+    MarketItemListings marketItemListings = 18;
+    MarketItemListingsRequest marketItemListingsRequest = 19;
 
-    ConnectionAccepted connectionAccepted = 21;
+    ConnectionAccepted connectionAccepted = 20;
 
-    TransactionCreate transactionCreate = 22;
-    TransactionSignRequest transactionSignRequest = 23;
-    TransactionSignResponse transactionSignResponse = 24;
-    TransactionResult transactionResult = 25;
+    TransactionCreate transactionCreate = 21;
+    TransactionSignRequest transactionSignRequest = 22;
+    TransactionSignResponse transactionSignResponse = 23;
+    TransactionResult transactionResult = 24;
 
-    Failure failure = 26;
+    Failure failure = 25;
 
-    Chunk chunk = 27;
+    Chunk chunk = 26;
 
-    ServerCommand serverCommand = 28;
+    ServerCommand serverCommand = 27;
+    SelectCharacter selectCharacter = 28;
   }
 }
 
